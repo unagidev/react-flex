@@ -1,20 +1,28 @@
 // @flow
 import React, { useEffect, useState } from 'react';
-import { isObj, getId } from './helpers';
+import { getId, isObj } from './helpers';
+import type { Breakpoints } from './StyleManager';
 import styleManager from './StyleManager';
 
 type Props = {
   children: React$Element<any>,
   className?: string,
-  direction?: string | Object,
-  wrap?: string | Object,
-  align?: string | Object,
-  spacing?: string | Object
+  direction?: string | Breakpoints,
+  wrap?: string | Breakpoints,
+  align?: string | Breakpoints,
+  spacing?: string | Breakpoints
 };
 
 const Flex = (props: Props) => {
   const [id, setId] = useState(null);
-  const { children, className = '', direction, wrap, align, spacing } = props;
+  const {
+    children,
+    className = '',
+    direction = { xs: 'row' },
+    wrap = { xs: 'nowrap' },
+    align = { xs: 'start' },
+    spacing = { xs: 0 }
+  } = props;
 
   const getSpacingValue = config => {
     return `${typeof config === 'number' ? `${config}px` : config}`;
@@ -50,48 +58,50 @@ const Flex = (props: Props) => {
     return { margin, padding };
   };
 
-  const addRule = (bp, rules, rule) => {
-    if (rules[bp]) {
-      rules[bp].push(rule);
+  const addRule = (breakpoint: string, rules: Breakpoints, rule: string) => {
+    if (rules[breakpoint]) {
+      rules[breakpoint].push(rule);
     } else {
-      rules[bp] = [];
-      rules[bp].push(rule);
+      rules[breakpoint] = [];
+      rules[breakpoint].push(rule);
     }
   };
 
-  const addBreackPointRules = (rules, key, prop) => {
-    const breackPoints = Object.keys(styleManager.breackPoints);
-    breackPoints.forEach(breackPoint => {
-      if (direction[breackPoint]) {
-        addRule(breackPoint, rules, `${key}: ${prop[breackPoint]};`);
+  const addBreackPointRules = (
+    rules: Breakpoints,
+    key: string,
+    prop: Breakpoints
+  ) => {
+    const breakpoints = Object.keys(styleManager.breakpoints);
+    breakpoints.forEach(breakpoint => {
+      if (prop[breakpoint]) {
+        addRule(breakpoint, rules, `${key}: ${prop[breakpoint]};`);
       }
     });
   };
 
-  const getRules = (media = false) => {
+  const getRules = () => {
     const rules = {};
 
-    if (!media) {
-      addRule('xs', rules, 'display:flex;');
-    }
+    addRule('xs', rules, 'display:flex;');
 
     if (isObj(direction)) {
       addRule('xs', rules, `flex-direction: ${direction.xs};`);
       addBreackPointRules(rules, 'flex-direction', direction);
     } else {
-      addRule('xs', rules, `flex-direction: ${direction || 'row;'};`);
+      addRule('xs', rules, `flex-direction: ${direction};`);
     }
 
     if (isObj(spacing)) {
       const { margin, padding } = getSpacing(spacing.xs);
       addRule('xs', rules, `margin: ${margin};`);
       addRule('xs', rules, `padding: ${padding};`);
-      const breackPoints = Object.keys(styleManager.breackPoints);
-      breackPoints.forEach(breackPoint => {
-        if (spacing[breackPoint]) {
-          const { margin, padding } = getSpacing(spacing[breackPoint]);
-          addRule(breackPoint, rules, `margin: ${margin};`);
-          addRule(breackPoint, rules, `padding: ${padding};`);
+      const breakpoints = Object.keys(styleManager.breakpoints);
+      breakpoints.forEach(breakpoint => {
+        if (spacing[breakpoint]) {
+          const { margin, padding } = getSpacing(spacing[breakpoint]);
+          addRule(breakpoint, rules, `margin: ${margin};`);
+          addRule(breakpoint, rules, `padding: ${padding};`);
         }
       });
     } else {
@@ -102,19 +112,20 @@ const Flex = (props: Props) => {
     return rules;
   };
 
-  useEffect(() => {
-    setId(getId());
-    return styleManager.removeClass(id);
-  }, []);
-
   const getClass = _id => {
     if (_id) {
       const rules = getRules();
-      return styleManager.addClass(id, rules);
+      return styleManager.addClass(_id, rules);
     }
 
     return '';
   };
+
+  useEffect(() => {
+    const _id = getId();
+    setId(_id);
+    return styleManager.removeClass(_id);
+  }, []);
 
   return <div className={`${getClass(id)} ${className}`}>{children}</div>;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import Flex from '../lib';
-import './App.scss';
+// import './App.scss';
 
 const App = () => {
   return (

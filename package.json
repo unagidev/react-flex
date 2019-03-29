@@ -21,6 +21,7 @@
   "homepage": "https://github.com/unagidev/react-flex#readme",
   "license": "MIT",
   "dependencies": {
+    "nanoid": "^2.0.1",
     "node-sass": "^4.11.0"
   },
   "devDependencies": {
