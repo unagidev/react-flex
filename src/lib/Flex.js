@@ -1,28 +1,32 @@
 // @flow
 import React, { useEffect, useState } from 'react';
-import shortid from 'shortid';
-import { isObj } from './helpers';
-import './Grid.scss';
+import { isObj, getId } from './helpers';
 import styleManager from './StyleManager';
 
-const Flex = React.memo((props) => {
-  const [id, setId] = useState(null);
-  const { direction, wrap, align, spacing } = props;
+type Props = {
+  children: React$Element<any>,
+  className?: string,
+  direction?: string | Object,
+  wrap?: string | Object,
+  align?: string | Object,
+  spacing?: string | Object
+};
 
-  const getSpacingValue = (config) => {
+const Flex = (props: Props) => {
+  const [id, setId] = useState(null);
+  const { children, className = '', direction, wrap, align, spacing } = props;
+
+  const getSpacingValue = config => {
     return `${typeof config === 'number' ? `${config}px` : config}`;
   };
-  const getSpacingProperty = (config) => {
-    switch (config.length) {
-      case 2:
-        return `${getSpacingValue(config[0])} ${getSpacingValue(config[1])}`;
-      case 4:
-        return `${getSpacingValue(config[0])} ${getSpacingValue(config[1])} ${getSpacingValue(config[2])} ${getSpacingValue(config[3])}`;
-      default:
-        return 0;
+  const getSpacingProperty = config => {
+    if (config.length === 2 || config.length === 4) {
+      return `${config.map(value => getSpacingValue(value)).join(' ')}`;
+    } else {
+      return 0;
     }
   };
-  const getSpacing = (config) => {
+  const getSpacing = config => {
     let margin = '0';
     let padding = '0';
     if (typeof config === 'undefined') {
@@ -85,9 +89,9 @@ const Flex = React.memo((props) => {
       const breackPoints = Object.keys(styleManager.breackPoints);
       breackPoints.forEach(breackPoint => {
         if (spacing[breackPoint]) {
-          const { _margin, _padding } = getSpacing(spacing[breackPoint]);
-          addRule(breackPoint, rules, `margin: ${_margin};`);
-          addRule(breackPoint, rules, `padding: ${_padding};`);
+          const { margin, padding } = getSpacing(spacing[breackPoint]);
+          addRule(breackPoint, rules, `margin: ${margin};`);
+          addRule(breackPoint, rules, `padding: ${padding};`);
         }
       });
     } else {
@@ -99,7 +103,7 @@ const Flex = React.memo((props) => {
   };
 
   useEffect(() => {
-    setId(shortid.generate());
+    setId(getId());
     return styleManager.removeClass(id);
   }, []);
 
@@ -112,11 +116,7 @@ const Flex = React.memo((props) => {
     return '';
   };
 
-  return (
-    <div className={getClass(id)}>
-      {props.children}
-    </div>
-  );
-});
+  return <div className={`${getClass(id)} ${className}`}>{children}</div>;
+};
 
 export default Flex;

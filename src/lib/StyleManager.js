@@ -40,7 +40,7 @@ class StyleManager {
   getRules(rules) {
     const out = [];
     rules.forEach((properties, key) => {
-      out.push(`.grid-${key}{ ${properties.join(' ')} };`);
+      out.push(`.grid-${key}{ ${properties.join(' ')} }`);
     });
     return out.join('\n');
   }
