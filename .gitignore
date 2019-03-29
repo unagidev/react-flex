@@ -1,17 +1,17 @@
-
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-node_modules
+/node_modules
 
-# builds
-build
-dist
-.rpt2_cache
+# production
+/build
+/demo
+
+# testing
+/coverage
 
 # misc
 .DS_Store
-.env
 .env.local
 .env.development.local
 .env.test.local
@@ -19,5 +19,7 @@ dist
 .idea
 
 npm-debug.log*
+package-lock.json
 yarn-debug.log*
 yarn-error.log*
+yarn.lock

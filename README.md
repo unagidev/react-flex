@@ -7,7 +7,11 @@
 ## Install
 
 ```bash
-npm install --save react-flex
+npm install --save @unagidev/react-flex
+```
+or 
+```bash
+yarn add @unagidev/react-flex
 ```
 
 ## Usage
