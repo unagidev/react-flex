@@ -112,7 +112,6 @@ class StyleManager {
 
     this.updateSheet();
   }
-
 }
 
 export default new StyleManager();

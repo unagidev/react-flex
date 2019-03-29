@@ -119,4 +119,4 @@ const Flex = React.memo((props) => {
   );
 });
 
-export { Flex };
+export default Flex;
