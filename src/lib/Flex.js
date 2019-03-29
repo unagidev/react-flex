@@ -67,15 +67,11 @@ const Flex = (props: Props) => {
     }
   };
 
-  const addBreackPointRules = (
-    rules: Breakpoints,
-    key: string,
-    prop: Breakpoints
-  ) => {
+  const addRules = (rules: Breakpoints, key: string, props: Breakpoints) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
     breakpoints.forEach(breakpoint => {
-      if (prop[breakpoint]) {
-        addRule(breakpoint, rules, `${key}: ${prop[breakpoint]};`);
+      if (props[breakpoint]) {
+        addRule(breakpoint, rules, `${key}: ${props[breakpoint]};`);
       }
     });
   };
@@ -87,7 +83,7 @@ const Flex = (props: Props) => {
 
     if (isObj(direction)) {
       addRule('xs', rules, `flex-direction: ${direction.xs};`);
-      addBreackPointRules(rules, 'flex-direction', direction);
+      addRules(rules, 'flex-direction', direction);
     } else {
       addRule('xs', rules, `flex-direction: ${direction};`);
     }
