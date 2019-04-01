@@ -111,6 +111,9 @@ class Flex extends Component<Props, State> {
       align,
       spacing,
       wrap,
+      grow,
+      gap,
+      basis,
       className,
       ...rest
     } = this.props;

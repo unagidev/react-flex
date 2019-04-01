@@ -9,7 +9,7 @@ type MainAxisAlign =
   | 'space-around'
   | 'space-evenly';
 
-type CrossAxisAlign = 'start' | 'end' | 'center' | 'baseline' | 'strech';
+type CrossAxisAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
 
 export const getAlignDeclaration = (
   config: string | [MainAxisAlign, CrossAxisAlign]
