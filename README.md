@@ -24,7 +24,7 @@ import Flex from '@unagidev/react-flex'
 class Example extends Component {
   render () {
     return (
-        <Flex align='center'>
+        <Flex container align='center'>
             <Flex item>I'm vertically centered!</Flex>
         </Flex>
     )
@@ -34,40 +34,40 @@ class Example extends Component {
 
 ```jsx
 // flex row
-<Flex>
+<Flex container>
     ...
 </Flex>
 
 // flex column
-<Flex direction="column">
+<Flex container direction="column">
     ...
 </Flex>
 ```
 
-### Props
+## Props
 
-#### children
+### children
 **Type:** <code>ReactChildren</code>
 
 **Required**. Flex content.
 
-#### container
+### container
 **Type:** <code>boolean</code>
 
 **Optional**. **Default:** false. If true, the component will have the flex container behavior. You should be wrapping items with a container.
 
-#### item
+### item
 **Type:** <code>boolean</code>
 
 **Optional**. **Default:** false. If true, the component will have the flex item behavior. You should be wrapping items with a container.
 
-#### direction
-**Type:** <code>enum('row' | 'column') | Breakpoints{key:breakpoint, property: direction}</code>
+### direction
+**Type:** <code>enum('row' | 'column') | Breakpoints{key, property}</code>
 
 **Optional**. **Default:** 'row'. Sets the orientation.
 
-#### align
-**Type:** <code>mainAxis | [mainAxis, crossAxis] | Breakpoints{key:breakpoint, property: mainAxis | [mainAxis, crossAxis]}</code>
+### align
+**Type:** <code>mainAxis | [mainAxis, crossAxis] | Breakpoints{key, property}</code>
 
 **[mainAxis] Type:** <code>'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly'</code>
 
@@ -75,8 +75,8 @@ class Example extends Component {
 
 **Optional**. Sets the distribution of space around content items of a flex container.
 
-#### spacing
-**Type:** <code>outerSpace | [outerSpace, innerSpace] | Breakpoints{key:breakpoint, property: outerSpace | [outerSpace, innerSpace]}</code>
+### spacing
+**Type:** <code>outerSpace | [outerSpace, innerSpace] | Breakpoints{key:breakpoint, property}</code>
 
 **[outerSpace, innerSpace] Type:** <code>number | string | [verticalSpace, horizontalSpace] | [top, right, bottom, left]</code>
 
@@ -87,8 +87,48 @@ class Example extends Component {
 **Optional**. Sets the outerSpace (margin), innerSpace (padding) of the flex element. On number values spacing unit is px.
 on string values a valid margin, padding unit.
 
-### Responsive
-#### Breakpoints
+### size
+**Type:** <code>height | [height, width] | Breakpoints{key:breakpoint, property}</code>
+
+**[height, width] Type:** <code>number | string</code>
+
+**Optional**. Sets the size of the flex element. If number values size unit is px.
+on string values a valid height, width unit.
+
+### wrap
+**Type:** <code>height | [height, width] | Breakpoints{key:breakpoint, property}</code>
+
+**[height, width] Type:** <code>number | string</code>
+
+**Optional**. Sets the size of the flex element. If number values size unit is px.
+on string values a valid height, width unit.
+
+### basis
+**Type:** <code>height | [height, width] | Breakpoints{key:breakpoint, property}</code>
+
+**[height, width] Type:** <code>number | string</code>
+
+**Optional**. Sets the size of the flex element. If number values size unit is px.
+on string values a valid height, width unit.
+
+### grow
+**Type:** <code>height | [height, width] | Breakpoints{key:breakpoint, property}</code>
+
+**[height, width] Type:** <code>number | string</code>
+
+**Optional**. Sets the size of the flex element. If number values size unit is px.
+on string values a valid height, width unit.
+
+### shrink
+**Type:** <code>height | [height, width] | Breakpoints{key:breakpoint, property}</code>
+
+**[height, width] Type:** <code>number | string</code>
+
+**Optional**. Sets the size of the flex element. If number values size unit is px.
+on string values a valid height, width unit.
+
+## Responsive
+### Breakpoints
 
 
 
