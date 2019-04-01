@@ -1,15 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import { getId, isObj } from './helpers';
+import { getId } from './helpers';
 import type { Breakpoints } from './StyleManager';
 import styleManager from './StyleManager';
 import {
-  getDisplay,
-  getDirection,
-  getSpacing,
-  getSpacingDeclaration,
+  getAlign,
   getAlignDeclaration,
-  getAlign
+  getDirection,
+  getDisplay,
+  getSpacing,
+  getSpacingDeclaration
 } from './properties';
 
 type Props = {
@@ -17,8 +17,13 @@ type Props = {
   className?: string,
   item?: boolean,
   direction?: string | Breakpoints,
-  wrap?: string | Breakpoints,
   align?: string | Breakpoints,
+  alignSelf?: string | Breakpoints,
+  inline?: boolean | Breakpoints,
+  wrap?: string | Breakpoints,
+  grow?: string | Breakpoints,
+  gap?: string | Breakpoints,
+  basis?: string | Breakpoints,
   spacing?: string | Breakpoints
 };
 
