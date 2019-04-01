@@ -45,17 +45,52 @@ class Example extends Component {
 ```
 
 ### Props
-| Name          | Type                                                                     | Default | Description                                             |
-|---------------|--------------------------------------------------------------------------|:-------:|---------------------------------------------------------|
-| **children**  | <code>ReactChildren</code>                                               |         | **required**. FlexView content |
-| **align**     | <code>string &#124; [mainAxis, crossAxis] &#124; Breackpoint{}</code>    |         | *optional*. Align content vertically |
-| **spacing**   | <code>string &#124; [innerSpace, outerSpace] &#124; Breackpoint{}</code> |         | *optional*. Align content horizontally |
-| **grow**      | <code>Boolean &#124; Breackpoint{}</code>                                |         | *optional*. Property (for parent primary axis) |
-| **shrink**    | <code>Boolean &#124; Breackpoint{}</code>                                |         | *optional*. Flex-shrink property |
-| **basis**     | <code>Boolean &#124; Breackpoint{}</code>                                |         | *optional*. Flex-basis property |
-| **wrap**      | <code>Boolean &#124; Breackpoint{}</code>                                |         | *optional*. Wrap content |
-| **className** | <code>String</code>                                                      |         | *optional*. Additional `className` for wrapper element |
-| **style**     | <code>Object</code>                                                      |         | *optional*. Inline-style overrides for wrapper element |
+
+#### children
+**Type:** <code>ReactChildren</code>
+
+**Required**. Flex content.
+
+#### container
+**Type:** <code>boolean</code>
+
+**Optional**. **Default:** false. If true, the component will have the flex container behavior. You should be wrapping items with a container.
+
+#### item
+**Type:** <code>boolean</code>
+
+**Optional**. **Default:** false. If true, the component will have the flex item behavior. You should be wrapping items with a container.
+
+#### direction
+**Type:** <code>enum('row' | 'column') | Breakpoints{key:breakpoint, property: direction}</code>
+
+**Optional**. **Default:** 'row'. Sets the orientation.
+
+#### align
+**Type:** <code>mainAxis | [mainAxis, crossAxis] | Breakpoints{key:breakpoint, property: mainAxis | [mainAxis, crossAxis]}</code>
+
+**[mainAxis] Type:** <code>'start' | 'center' | 'end' | 'space-between' | 'space-around' | 'space-evenly'</code>
+
+**[crossAxis] Type:** <code>'start' | 'center' | 'end' | 'baseline' | 'stretch' </code>
+
+**Optional**. Sets the distribution of space around content items of a flex container.
+
+#### spacing
+**Type:** <code>outerSpace | [outerSpace, innerSpace] | Breakpoints{key:breakpoint, property: outerSpace | [outerSpace, innerSpace]}</code>
+
+**[outerSpace, innerSpace] Type:** <code>number | string | [verticalSpace, horizontalSpace] | [top, right, bottom, left]</code>
+
+**[verticalSpace, horizontalSpace] Type:** <code>number | string</code>
+
+**[top, right, bottom, left] Type:** <code>number | string</code>
+
+**Optional**. Sets the outerSpace (margin), innerSpace (padding) of the flex element. On number values spacing unit is px.
+on string values a valid margin, padding unit.
+
+### Responsive
+#### Breakpoints
+
+
 
 ## License
 
