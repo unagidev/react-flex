@@ -12,3 +12,9 @@ export const isArr = (value: any) => {
 export const getId = () => {
   return nanoid(6);
 };
+
+const warn = (warning: string): void => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn(warning); // eslint-disable-line no-console
+  }
+};

@@ -1,16 +1,29 @@
 import React from 'react';
 import Flex from '../lib';
-// import './App.scss';
+import './App.scss';
 
 const App = () => {
   return (
     <div className="app">
       <Flex direction="column" spacing={{ xs: 40, es: 10 }}>
-        <Flex className="item" spacing={{ xs: 20, es: 5 }}>
-          Row1
+        <Flex
+          spacing={{ xs: 10, es: 5 }}
+          align={['start', 'start']}
+          style={{ height: 60 }}
+        >
+          <Flex item spacing={[5, 10]}>
+            Item1
+          </Flex>
+          <Flex item spacing={[5, 10]}>
+            Item2
+          </Flex>
+          <Flex item spacing={[5, 10]}>
+            Item3
+          </Flex>
         </Flex>
-        <Flex spacing={{ xs: 20, es: 5 }}>Row1</Flex>
-        <Flex spacing={{ xs: 20, es: 5 }}>Row1</Flex>
+        <Flex spacing={{ xs: 10, es: 5 }}>Row1</Flex>
+        <Flex spacing={{ xs: 10, es: 5 }}>Row2</Flex>
+        <Flex spacing={{ xs: 10, es: 5 }}>Row3</Flex>
       </Flex>
     </div>
   );

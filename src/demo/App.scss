@@ -1,0 +1,31 @@
+@import './styles/Reset';
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,300,400,400i,600,600i,700,800,900');
+
+html * {
+  font-size: 18px;
+  font-family: 'Nunito', sans-serif;
+  letter-spacing: 0.5px;
+  line-height: 18px;
+}
+
+body {
+  overflow: hidden;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.flex {
+  background: transparentize(#005b9f, 0.8);
+}
+
+.flex-item {
+  background: transparentize(#005b9f, 0.2);
+  color: #fafafa
+}
+
+.item {
+  background: aliceblue;
+}
+

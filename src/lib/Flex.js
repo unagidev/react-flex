@@ -1,129 +1,131 @@
 // @flow
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import { getId, isObj } from './helpers';
 import type { Breakpoints } from './StyleManager';
 import styleManager from './StyleManager';
+import {
+  getDisplay,
+  getDirection,
+  getSpacing,
+  getSpacingDeclaration,
+  getAlignDeclaration,
+  getAlign
+} from './properties';
 
 type Props = {
   children: React$Element<any>,
   className?: string,
+  item?: boolean,
   direction?: string | Breakpoints,
   wrap?: string | Breakpoints,
   align?: string | Breakpoints,
   spacing?: string | Breakpoints
 };
 
-const Flex = (props: Props) => {
-  const [id, setId] = useState(null);
-  const {
-    children,
-    className = '',
-    direction = { xs: 'row' },
-    wrap = { xs: 'nowrap' },
-    align = { xs: 'start' },
-    spacing = { xs: 0 }
-  } = props;
+type State = {
+  id: string,
+  rules: Object
+};
 
-  const getSpacingValue = config => {
-    return `${typeof config === 'number' ? `${config}px` : config}`;
+class Flex extends Component<Props, State> {
+  state = {
+    id: '',
+    rules: {}
   };
-  const getSpacingProperty = config => {
-    if (config.length === 2 || config.length === 4) {
-      return `${config.map(value => getSpacingValue(value)).join(' ')}`;
+
+  componentWillMount(): void {
+    const id = getId();
+    this.setState({ id: id });
+  }
+
+  componentWillUnmount(): void {
+    //
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State, nextContext: any) {
+    return true;
+  }
+
+  addRule = (selector: string, declaration: string) => {
+    const { rules } = this.state;
+
+    if (rules[selector]) {
+      rules[selector].push(declaration);
     } else {
-      return 0;
-    }
-  };
-  const getSpacing = config => {
-    let margin = '0';
-    let padding = '0';
-    if (typeof config === 'undefined') {
-      return { margin, padding };
-    }
-    if (typeof config === 'number') {
-      margin = `${config}px`;
-      return { margin, padding };
-    }
-    if (typeof config === 'string') {
-      margin = config;
-      return { margin, padding };
-    }
-    const [outerSpace, innerSpace] = config;
-    padding = Array.isArray(innerSpace)
-      ? getSpacingProperty(innerSpace)
-      : getSpacingValue(innerSpace);
-    margin = Array.isArray(outerSpace)
-      ? getSpacingProperty(outerSpace)
-      : getSpacingValue(outerSpace);
-    return { margin, padding };
-  };
-
-  const addRule = (breakpoint: string, rules: Breakpoints, rule: string) => {
-    if (rules[breakpoint]) {
-      rules[breakpoint].push(rule);
-    } else {
-      rules[breakpoint] = [];
-      rules[breakpoint].push(rule);
+      rules[selector] = [];
+      rules[selector].push(declaration);
     }
   };
 
-  const addRules = (rules: Breakpoints, key: string, props: Breakpoints) => {
+  addRules = (
+    propKeys: string[],
+    props: Breakpoints,
+    getPropValues: ?(props: Object) => [string, string]
+  ) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
     breakpoints.forEach(breakpoint => {
       if (props[breakpoint]) {
-        addRule(breakpoint, rules, `${key}: ${props[breakpoint]};`);
+        if (getPropValues) {
+          const propValues = getPropValues(props[breakpoint]);
+          propValues.forEach((propValue, i) => {
+            this.addRule(breakpoint, `${propKeys[i]}: ${propValue};`);
+          });
+        } else {
+          this.addRule(breakpoint, `${propKeys[0]}: ${props[breakpoint]};`);
+        }
       }
     });
   };
 
-  const getRules = () => {
-    const rules = {};
+  buildRules() {
+    this.addRule('xs', getDisplay(this.props.item));
 
-    addRule('xs', rules, 'display:flex;');
+    this.addRules(['flex-direction'], getDirection(this.props.direction));
 
-    if (isObj(direction)) {
-      addRule('xs', rules, `flex-direction: ${direction.xs};`);
-      addRules(rules, 'flex-direction', direction);
-    } else {
-      addRule('xs', rules, `flex-direction: ${direction};`);
-    }
+    this.addRules(
+      ['margin', 'padding'],
+      getSpacing(this.props.spacing),
+      getSpacingDeclaration
+    );
 
-    if (isObj(spacing)) {
-      const { margin, padding } = getSpacing(spacing.xs);
-      addRule('xs', rules, `margin: ${margin};`);
-      addRule('xs', rules, `padding: ${padding};`);
-      const breakpoints = Object.keys(styleManager.breakpoints);
-      breakpoints.forEach(breakpoint => {
-        if (spacing[breakpoint]) {
-          const { margin, padding } = getSpacing(spacing[breakpoint]);
-          addRule(breakpoint, rules, `margin: ${margin};`);
-          addRule(breakpoint, rules, `padding: ${padding};`);
-        }
-      });
-    } else {
-      const { margin, padding } = getSpacing(spacing);
-      addRule('xs', rules, `margin: ${margin};`);
-      addRule('xs', rules, `padding: ${padding};`);
-    }
-    return rules;
-  };
+    this.addRules(
+      ['justify-content', 'align-items'],
+      getAlign(this.props.align),
+      getAlignDeclaration
+    );
+  }
 
-  const getClass = _id => {
-    if (_id) {
-      const rules = getRules();
-      return styleManager.addClass(_id, rules);
-    }
+  getClass() {
+    const { id } = this.state;
+    this.buildRules();
+    const prefix = this.props.item ? 'flex-item' : 'flex';
+    const className = styleManager.addClass(id, this.state.rules);
+    return `${prefix} ${className} ${this.props.className || ''}`;
+  }
 
-    return '';
-  };
+  getElProps() {
+    const {
+      children,
+      item,
+      direction,
+      align,
+      spacing,
+      wrap,
+      className,
+      ...rest
+    } = this.props;
 
-  useEffect(() => {
-    const _id = getId();
-    setId(_id);
-    return styleManager.removeClass(_id);
-  }, []);
+    return rest;
+  }
 
-  return <div className={`${getClass(id)} ${className}`}>{children}</div>;
-};
+  render() {
+    const { children } = this.props;
+    return (
+      <div className={this.getClass()} {...this.getElProps()}>
+        {children}
+      </div>
+    );
+  }
+}
 
 export default Flex;

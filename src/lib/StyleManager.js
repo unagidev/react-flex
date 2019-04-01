@@ -24,6 +24,7 @@ type MediaRulesMap = Map<string, RulesMap>;
 
 class StyleManager {
   breakpoints: Breakpoints = {
+    xs: `@media screen and (min-width : 0)`,
     es: `@media screen and (max-width : 575px)`,
     sm: `@media screen and (min-width : 576px) and (max-width : 767px)`,
     md: `@media screen and (min-width : 768px) and (max-width : 991px)`,
@@ -70,7 +71,7 @@ class StyleManager {
   _getMediaRules(rules: RulesMap): string {
     const out = [];
     rules.forEach((rule, key) => {
-      out.push(`.grid-${key}{ ${rule.join(' ')} }`);
+      out.push(`.fx-${key}{ ${rule.join(' ')} }`);
     });
     return out.join('\n');
   }
@@ -82,17 +83,17 @@ class StyleManager {
       if (rule) {
         const breakpoint = this.breakpoints[key];
         const mediaRules = this._getMediaRules(rule);
-        if (breakpoint) {
+        if (key !== 'xs' && breakpoint) {
           rules.unshift(`${breakpoint} { ${mediaRules} }`);
         } else {
           rule.forEach((mRule, key) => {
-            rules.push(`.grid-${key}{ ${mRule.join(' ')} }`);
+            rules.push(`.fx-${key}{ ${mRule.join(' ')} }`);
           });
         }
       }
     });
 
-    console.log(rules);
+    // console.log(rules);
     rules.forEach(rule => {
       this._sheet.insertRule(rule);
     });
@@ -120,7 +121,7 @@ class StyleManager {
 
     this._updateSheet();
 
-    return `grid-${id}`;
+    return `fx-${id}`;
   }
 
   removeClass(id: string) {
