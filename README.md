@@ -128,33 +128,43 @@ on string values a valid height, width unit.
 on string values a valid height, width unit.
 
 ### Props
-|Name           |Type                                                                                                        |Default|Description|
-|---------------|------------------------------------------------------------------------------------------------------------|-------|-----------|
-| **children**  | <code>ReactChildren</code>                                                                                 |       | **required**. FlexView content |
-| **container** | <code>Boolean</code>                                                                                       |       | *optional*. Flex-direction: column |
-| **item**      | <code>Boolean</code>                                                                                       |       | *optional*. Align content vertically |
-| **direction** | <code>enum('row' &#124; 'column')</code> &#124;<br> <code>Breakpoints{key, property}</code>                |       | *optional*. Align content horizontally |
-| **align**     | <code>mainAxis &#124; [mainAxis, crossAxis] </code> &#124;<br> <code>Breakpoints{key, property}</code>     |       | *optional*. Margin-left property ("auto" to align self right) |
-| **spacing**   | <code>outerSpace &#124; [outerSpace, innerSpace]</code> &#124;<br> <code>Breakpoints{key, property}</code> |       | *optional*. Margin-top property ("auto" to align self bottom) |
-| **gap**       | <code>number &#124; string</code> &#124;<br> <code>Breakpoints{key, property}</code>                       |       | *optional*. Margin-top property ("auto" to align self bottom) |
-| **size**      | <code>height &#124; [height, width] </code> &#124;<br> <code>Breakpoints{key, property}</code>             |       | *optional*. Margin-right property ("auto" to align self left) |
-| **grow**      | <code>Boolean &#124; Number </code> &#124;<br> <code>Breakpoints{key, property}</code>                     |       | *optional*. Property (for parent primary axis) |
-| **shrink**    | <code>Boolean &#124; Number </code> &#124;<br> <code>Breakpoints{key, property}</code>                     |       | *optional*. Flex-shrink property |
-| **basis**     | <code>Boolean &#124; Number </code> &#124;<br> <code>Breakpoints{key, property}</code>                     |       | *optional*. Flex-basis property |
-| **wrap**      | <code>Boolean </code> &#124;<br> <code>Breakpoints{key, property}</code>                                   |       | *optional*. Wrap content |
-| **className** | <code>String</code>                                                                                        |       | *optional*. Additional `className` for wrapper element |
-| **style**     | <code>Object</code>                                                                                        |       | *optional*. Inline-style overrides for wrapper element |
-
+|Name           |Type                                                                                                                                             |Description|
+|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| **children**  | <code>ReactChildren</code>                                                                                                                      | **required**. FlexView content |
+| **item**      | <code>Boolean</code>                                                                                                                            | *optional*. Align content vertically |
+| **direction** | <code>enum('row' &#124; 'column')</code> &#124;<br> <code>{[key: Breakpoint]: enum('row' &#124; 'column')}</code>                               | *optional*. Align content horizontally |
+| **align**     | <code>mainAxis &#124; [mainAxis, crossAxis]</code> &#124;<br> <code>{[key: Breakpoint]: mainAxis &#124; [mainAxis, crossAxis]}</code>           | *optional*. Margin-left property ("auto" to align self right) |
+| **alignSelf** | <code>alignSelf</code> &#124;<br> <code>{[key: Breakpoint]: alignSelf}</code>                                                                   | *optional*. Margin-left property ("auto" to align self right) |
+| **spacing**   | <code>outerSpace &#124; [outerSpace, innerSpace]</code> &#124;<br> <code>{[key: Breakpoint]: outerSpace &#124; [outerSpace, innerSpace]}</code> | *optional*. Margin-top property ("auto" to align self bottom) |
+| **gap**       | <code>number &#124; string</code> &#124;<br> <code>{[key: Breakpoint]: number &#124; string}</code>                                             | *optional*. Margin-top property ("auto" to align self bottom) |
+| **size**      | <code>height &#124; [height, width] </code> &#124;<br> <code>{[key: Breakpoint]: height &#124; [height, width]}</code>                          | *optional*. Margin-right property ("auto" to align self left) |
+| **grow**      | <code>Boolean &#124; Number </code> &#124;<br> <code>{[key: Breakpoint]: Boolean &#124; Number}</code>                                          | *optional*. Property (for parent primary axis) |
+| **shrink**    | <code>Boolean &#124; Number </code> &#124;<br> <code>{[key: Breakpoint]: Boolean &#124; Number}</code>                                          | *optional*. Flex-shrink property |
+| **basis**     | <code>Boolean &#124; Number </code> &#124;<br> <code>{[key: Breakpoint]: Boolean &#124; Number}</code>                                          | *optional*. Flex-basis property |
+| **wrap**      | <code>Boolean </code> &#124;<br> <code>{[key: Breakpoint]: Boolean}</code>                                                                      | *optional*. Wrap content |
+| **className** | <code>String</code>                                                                                                                             | *optional*. Additional `className` for wrapper element |
+| **style**     | <code>Object</code>                                                                                                                             | *optional*. Inline-style overrides for wrapper element |
 
 #### Custom Types
-|Name           |Type                                                                                                                                   |Description|
-|---------------|---------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| **mainAxis**  | <code>'start' &#124; 'center' &#124; 'end'</code> &#124;<br> <code>'space-between' &#124; 'space-around' &#124; 'space-evenly'</code> |           |      
-| **mainAxis**  | <code>'start' &#124; 'center' &#124; 'end'</code> &#124;<br> <code>'space-between' &#124; 'space-around' &#124; 'space-evenly'</code> |           | 
+|Name                 |Type                                                                                                                         |Description|
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------|-----------|
+| **Breakpoint**      | <code>enum('xs' &#124; 'es' &#124; 'sm' &#124; 'md' &#124; 'lg' &#124; 'xl')</code>                                         |           |   
+| **mainAxis**        | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'space-between' &#124; 'space-around' &#124; 'space-evenly'</code>   |           |      
+| **crossAxis**       | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'space-between' &#124; 'space-around' &#124; 'space-evenly'</code>   |           |      
+| **alignSelf**       | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'space-between' &#124; 'space-around' &#124; 'space-evenly'</code>   |           |      
+| **outerSpace**      | <code>string &#124; number &#124; [verticalSpace, horizontalSpace] &#124; [top, right, bottom, left]</code>                 |           |      
+| **innerSpace**      | <code>string &#124; number &#124; [verticalSpace, horizontalSpace] &#124; [top, right, bottom, left]</code>                 |           |      
+| **verticalSpace**   | <code>string &#124; number &#124; [verticalSpace, horizontalSpace] &#124; [top, right, bottom, left]</code>                 |           |      
+| **horizontalSpace** | <code>string &#124; number &#124; [verticalSpace, horizontalSpace] &#124; [top, right, bottom, left]</code>                 |           |      
+| **top**             | <code>string &#124; number</code>                                                                                           |           |      
+| **right**           | <code>string &#124; number</code>                                                                                           |           |      
+| **bottom**          | <code>string &#124; number</code>                                                                                           |           |      
+| **left**            | <code>string &#124; number</code>                                                                                           |           |      
+| **height**          | <code>string &#124; number</code>                                                                                           |           |      
+| **width**           | <code>string &#124; number</code>                                                                                           |           |      
 
                                          
 ## Responsive
-### Breakpoints
 
 
 
