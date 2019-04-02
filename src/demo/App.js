@@ -14,7 +14,7 @@ const App = () => {
           <Flex item spacing={[5, 10]}>
             Item1
           </Flex>
-          <Flex item spacing={[5, 10]}>
+          <Flex item spacing={[5, 10]} align="end">
             Item2
           </Flex>
           <Flex item spacing={[5, 10]}>

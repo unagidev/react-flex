@@ -1,6 +1,8 @@
 // @flow
 import { getId, isObj } from './helpers';
 
+type Breakpoint = 'xs' | 'es' | 'sm' | 'md' | 'lg' | 'es' | 'xl';
+
 type Breakpoints = {
   xs?: any,
   es?: any,

@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { getId } from './helpers';
-import type { Breakpoints } from './StyleManager';
+import type { Breakpoint } from './StyleManager';
 import styleManager from './StyleManager';
+import type { CrossAxisAlign, MainAxisAlign } from './properties';
 import {
   getAlign,
   getAlignDeclaration,
@@ -16,15 +17,18 @@ type Props = {
   children: React$Element<any>,
   className?: string,
   item?: boolean,
-  direction?: string | Breakpoints,
-  align?: string | Breakpoints,
-  alignSelf?: string | Breakpoints,
-  inline?: boolean | Breakpoints,
-  wrap?: string | Breakpoints,
-  grow?: string | Breakpoints,
-  gap?: string | Breakpoints,
-  basis?: string | Breakpoints,
-  spacing?: string | Breakpoints
+  direction?: string | { [key: Breakpoint]: string },
+  align?:
+    | MainAxisAlign
+    | [MainAxisAlign, CrossAxisAlign]
+    | { [key: Breakpoint]: MainAxisAlign | [MainAxisAlign, CrossAxisAlign] },
+  alignSelf?: string | { [key: Breakpoint]: string },
+  inline?: boolean | { [key: Breakpoint]: boolean },
+  wrap?: string | { [key: Breakpoint]: string },
+  grow?: string | { [key: Breakpoint]: string },
+  gap?: string | { [key: Breakpoint]: string },
+  basis?: string | { [key: Breakpoint]: string },
+  spacing?: string | { [key: Breakpoint]: string }
 };
 
 type State = {
@@ -64,7 +68,7 @@ class Flex extends Component<Props, State> {
 
   addRules = (
     propKeys: string[],
-    props: Breakpoints,
+    props: { [key: Breakpoint]: string },
     getPropValues: ?(props: Object) => [string, string]
   ) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
@@ -93,11 +97,19 @@ class Flex extends Component<Props, State> {
       getSpacingDeclaration
     );
 
-    this.addRules(
-      ['justify-content', 'align-items'],
-      getAlign(this.props.align),
-      getAlignDeclaration
-    );
+    if (this.props.item) {
+      this.addRules(
+        ['align-self'],
+        getAlign(this.props.align),
+        getAlignDeclaration
+      );
+    } else {
+      this.addRules(
+        ['justify-content', 'align-items'],
+        getAlign(this.props.align),
+        getAlignDeclaration
+      );
+    }
   }
 
   getClass() {

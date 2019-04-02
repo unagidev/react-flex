@@ -1,7 +1,7 @@
 // @flow
 import { isObj } from '../helpers';
 
-type MainAxisAlign =
+export type MainAxisAlign =
   | 'start'
   | 'end'
   | 'center'
@@ -9,7 +9,12 @@ type MainAxisAlign =
   | 'space-around'
   | 'space-evenly';
 
-type CrossAxisAlign = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
+export type CrossAxisAlign =
+  | 'start'
+  | 'end'
+  | 'center'
+  | 'baseline'
+  | 'stretch';
 
 export const getAlignDeclaration = (
   config: string | [MainAxisAlign, CrossAxisAlign]
@@ -23,6 +28,8 @@ export const getAlignDeclaration = (
     mainAxis = config;
     return [mainAxis, crossAxis];
   }
+
+  console.log();
 
   [mainAxis, crossAxis] = config;
   mainAxis =
