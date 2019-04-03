@@ -2,3 +2,8 @@ export * from './display';
 export * from './direction';
 export * from './spacing';
 export * from './align';
+export * from './alignSelf';
+export * from './wrap';
+export * from './grow';
+export * from './shrink';
+export * from './basis';

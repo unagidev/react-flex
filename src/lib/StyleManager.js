@@ -148,4 +148,4 @@ class StyleManager {
 }
 
 export default new StyleManager();
-export type { Breakpoints };
+export type { Breakpoints, Breakpoint };

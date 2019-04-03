@@ -3,32 +3,40 @@ import React, { Component } from 'react';
 import { getId } from './helpers';
 import type { Breakpoint } from './StyleManager';
 import styleManager from './StyleManager';
-import type { CrossAxisAlign, MainAxisAlign } from './properties';
+import type { CrossAxisAlign, MainAxisAlign, AlignSelf } from './properties';
 import {
   getAlign,
   getAlignDeclaration,
   getDirection,
   getDisplay,
   getSpacing,
-  getSpacingDeclaration
+  getSpacingDeclaration,
+  getAlignSelf,
+  getAlignSelfDeclaration,
+  getGrow,
+  getBasis,
+  getBasisDeclaration
 } from './properties';
+import { getWrap, getWrapDeclaration } from './properties/wrap';
+import { getGap, getGapDeclaration } from './properties/gap';
 
 type Props = {
   children: React$Element<any>,
   className?: string,
-  item?: boolean,
+  inline?: boolean | { [key: Breakpoint]: boolean },
   direction?: string | { [key: Breakpoint]: string },
   align?:
     | MainAxisAlign
     | [MainAxisAlign, CrossAxisAlign]
     | { [key: Breakpoint]: MainAxisAlign | [MainAxisAlign, CrossAxisAlign] },
-  alignSelf?: string | { [key: Breakpoint]: string },
-  inline?: boolean | { [key: Breakpoint]: boolean },
-  wrap?: string | { [key: Breakpoint]: string },
-  grow?: string | { [key: Breakpoint]: string },
-  gap?: string | { [key: Breakpoint]: string },
-  basis?: string | { [key: Breakpoint]: string },
-  spacing?: string | { [key: Breakpoint]: string }
+  alignSelf?: AlignSelf | { [key: Breakpoint]: AlignSelf },
+  wrap?: boolean | { [key: Breakpoint]: boolean },
+  grow?: number | { [key: Breakpoint]: number },
+  shrink?: number | { [key: Breakpoint]: number },
+  basis?: string | number | { [key: Breakpoint]: string | number },
+  gap?: number | { [key: Breakpoint]: number },
+  spacing?: string | { [key: Breakpoint]: string },
+  _layoutGap?: number | { [key: Breakpoint]: number }
 };
 
 type State = {
@@ -69,7 +77,7 @@ class Flex extends Component<Props, State> {
   addRules = (
     propKeys: string[],
     props: { [key: Breakpoint]: string },
-    getPropValues: ?(props: Object) => [string, string]
+    getPropValues: ?(props: Object) => [string, ?string]
   ) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
     breakpoints.forEach(breakpoint => {
@@ -77,7 +85,9 @@ class Flex extends Component<Props, State> {
         if (getPropValues) {
           const propValues = getPropValues(props[breakpoint]);
           propValues.forEach((propValue, i) => {
-            this.addRule(breakpoint, `${propKeys[i]}: ${propValue};`);
+            if (propValue) {
+              this.addRule(breakpoint, `${propKeys[i]}: ${propValue};`);
+            }
           });
         } else {
           this.addRule(breakpoint, `${propKeys[0]}: ${props[breakpoint]};`);
@@ -89,33 +99,64 @@ class Flex extends Component<Props, State> {
   buildRules() {
     this.addRule('xs', getDisplay(this.props.item));
 
+    // direction
     this.addRules(['flex-direction'], getDirection(this.props.direction));
 
+    // align
+    this.addRules(
+      ['justify-content', 'align-items'],
+      getAlign(this.props.align),
+      getAlignDeclaration
+    );
+
+    // alignSelf
+    this.addRules(
+      ['align-self'],
+      getAlignSelf(this.props.alignSelf),
+      getAlignSelfDeclaration
+    );
+
+    // wrap
+    this.addRules(['flex-wrap'], getWrap(this.props.wrap), getWrapDeclaration);
+
+    // grow
+    if (this.props.grow) {
+      this.addRules(['flex-grow'], getGrow(this.props.grow));
+    }
+
+    // shrink
+    if (this.props.shrink) {
+      this.addRules(['flex-shrink'], getGrow(this.props.shrink));
+    }
+
+    // basis
+    this.addRules(
+      ['flex-basis'],
+      getBasis(this.props.basis),
+      getBasisDeclaration
+    );
+
+    // gap
+    if (this.props._layoutGap) {
+      this.addRules(
+        ['padding'],
+        getGap(this.props._layoutGap),
+        getGapDeclaration
+      );
+    }
+
+    // spacing
     this.addRules(
       ['margin', 'padding'],
       getSpacing(this.props.spacing),
       getSpacingDeclaration
     );
-
-    if (this.props.item) {
-      this.addRules(
-        ['align-self'],
-        getAlign(this.props.align),
-        getAlignDeclaration
-      );
-    } else {
-      this.addRules(
-        ['justify-content', 'align-items'],
-        getAlign(this.props.align),
-        getAlignDeclaration
-      );
-    }
   }
 
   getClass() {
     const { id } = this.state;
     this.buildRules();
-    const prefix = this.props.item ? 'flex-item' : 'flex';
+    const prefix = 'flex';
     const className = styleManager.addClass(id, this.state.rules);
     return `${prefix} ${className} ${this.props.className || ''}`;
   }
@@ -123,14 +164,16 @@ class Flex extends Component<Props, State> {
   getElProps() {
     const {
       children,
-      item,
       direction,
       align,
+      alignSelf,
       spacing,
       wrap,
       grow,
       gap,
+      _layoutGap,
       basis,
+      shrink,
       className,
       ...rest
     } = this.props;
@@ -138,11 +181,20 @@ class Flex extends Component<Props, State> {
     return rest;
   }
 
+  children = React.Children.map(this.props.children, child => {
+    // console.log(child);
+    if (child.type && child.type.name === 'Flex') {
+      return React.cloneElement(child, {
+        _layoutGap: this.props.gap
+      });
+    }
+    return child;
+  });
+
   render() {
-    const { children } = this.props;
     return (
       <div className={this.getClass()} {...this.getElProps()}>
-        {children}
+        {this.children}
       </div>
     );
   }

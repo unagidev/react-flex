@@ -25,11 +25,10 @@ export const getAlignDeclaration = (
     return [mainAxis, crossAxis];
   }
   if (typeof config === 'string') {
-    mainAxis = config;
+    mainAxis =
+      config === 'start' || config === 'end' ? `flex-${config}` : config;
     return [mainAxis, crossAxis];
   }
-
-  console.log();
 
   [mainAxis, crossAxis] = config;
   mainAxis =
@@ -47,5 +46,5 @@ export const getAlign = (align: string | Object) => {
     return align;
   }
 
-  return { xs: align || 'flex-start' };
+  return { xs: align || 'start' };
 };
