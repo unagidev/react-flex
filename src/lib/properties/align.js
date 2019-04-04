@@ -18,9 +18,9 @@ export type CrossAxisAlign =
 
 export const getAlignDeclaration = (
   config: string | [MainAxisAlign, CrossAxisAlign]
-): [string, string] => {
-  let mainAxis = 'flex-start';
-  let crossAxis = 'stretch';
+): [string | null, string | null] => {
+  let mainAxis = null;
+  let crossAxis = null;
   if (typeof config === 'undefined') {
     return [mainAxis, crossAxis];
   }
@@ -46,5 +46,5 @@ export const getAlign = (align: string | Object) => {
     return align;
   }
 
-  return { xs: align || 'start' };
+  return { xs: align || null };
 };
