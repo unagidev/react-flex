@@ -5,7 +5,7 @@ import '../App.scss';
 const Align = () => {
   return (
     <Fragment>
-      <Flex spacing={[5, 10]}>
+      <Flex spacing={['40px 0 10px 0', 0]}>
         <h2>Flex Align</h2>
       </Flex>
       <Flex>
@@ -19,18 +19,11 @@ const Align = () => {
             align="start"
             style={{ height: 80 }}
           >
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item1</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item3</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item4</div>
-            </Flex>
+            {[...Array(4)].map((u, i) => (
+              <Flex key={i} spacing={[5, 10]}>
+                <div className="item">Item {i + 1}</div>
+              </Flex>
+            ))}
           </Flex>
           <Flex
             className="container"
@@ -38,18 +31,11 @@ const Align = () => {
             align="center"
             style={{ height: 80 }}
           >
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item1</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item3</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item4</div>
-            </Flex>
+            {[...Array(4)].map((u, i) => (
+              <Flex key={i} spacing={[5, 10]}>
+                <div className="item">Item {i + 1}</div>
+              </Flex>
+            ))}
           </Flex>
           <Flex
             className="container"
@@ -57,18 +43,11 @@ const Align = () => {
             align="end"
             style={{ height: 80 }}
           >
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item1</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item3</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item4</div>
-            </Flex>
+            {[...Array(4)].map((u, i) => (
+              <Flex key={i} spacing={[5, 10]}>
+                <div className="item">Item {i + 1}</div>
+              </Flex>
+            ))}
           </Flex>
         </Flex>
         <Flex direction="column" basis={50}>
@@ -81,18 +60,11 @@ const Align = () => {
             align={['start', 'start']}
             style={{ height: 80 }}
           >
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item1</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
+            {[...Array(4)].map((u, i) => (
+              <Flex key={i} spacing={[5, 10]}>
+                <div className="item">Item {i + 1}</div>
+              </Flex>
+            ))}
           </Flex>
           <Flex
             className="container"
@@ -100,18 +72,11 @@ const Align = () => {
             align={['start', 'center']}
             style={{ height: 80 }}
           >
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item1</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
+            {[...Array(4)].map((u, i) => (
+              <Flex key={i} spacing={[5, 10]}>
+                <div className="item">Item {i + 1}</div>
+              </Flex>
+            ))}
           </Flex>
           <Flex
             className="container"
@@ -119,18 +84,11 @@ const Align = () => {
             align={['start', 'end']}
             style={{ height: 80 }}
           >
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item1</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
-            <Flex spacing={[5, 10]}>
-              <div className="item">Item2</div>
-            </Flex>
+            {[...Array(4)].map((u, i) => (
+              <Flex key={i} spacing={[5, 10]}>
+                <div className="item">Item {i + 1}</div>
+              </Flex>
+            ))}
           </Flex>
         </Flex>
       </Flex>

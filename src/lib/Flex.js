@@ -15,10 +15,13 @@ import {
   getAlignSelfDeclaration,
   getGrow,
   getBasis,
-  getBasisDeclaration
+  getBasisDeclaration,
+  getAlignContent,
+  getAlignContentDeclaration
 } from './properties';
 import { getWrap, getWrapDeclaration } from './properties/wrap';
 import { getGap, getGapDeclaration } from './properties/gap';
+import type { AlignContent } from './properties/alignContent';
 
 type Props = {
   children: React$Element<any>,
@@ -29,7 +32,8 @@ type Props = {
     | MainAxisAlign
     | [MainAxisAlign, CrossAxisAlign]
     | { [key: Breakpoint]: MainAxisAlign | [MainAxisAlign, CrossAxisAlign] },
-  alignSelf?: AlignSelf | { [key: Breakpoint]: AlignSelf },
+  alignSelf?: AlignContent | { [key: Breakpoint]: AlignContent },
+  alignContent?: AlignSelf | { [key: Breakpoint]: AlignSelf },
   wrap?: boolean | { [key: Breakpoint]: boolean },
   grow?: number | { [key: Breakpoint]: number },
   shrink?: number | { [key: Breakpoint]: number },
@@ -116,6 +120,13 @@ class Flex extends Component<Props, State> {
       getAlignSelfDeclaration
     );
 
+    // alignContent
+    this.addRules(
+      ['align-content'],
+      getAlignContent(this.props.alignContent),
+      getAlignContentDeclaration
+    );
+
     // wrap
     this.addRules(['flex-wrap'], getWrap(this.props.wrap), getWrapDeclaration);
 
@@ -167,6 +178,7 @@ class Flex extends Component<Props, State> {
       direction,
       align,
       alignSelf,
+      alignContent,
       spacing,
       wrap,
       grow,
@@ -183,7 +195,7 @@ class Flex extends Component<Props, State> {
 
   children = React.Children.map(this.props.children, child => {
     // console.log(child);
-    if (child.type && child.type.name === 'Flex') {
+    if (child && child.type && child.type.name === 'Flex') {
       return React.cloneElement(child, {
         _layoutGap: this.props.gap
       });

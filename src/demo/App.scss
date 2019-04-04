@@ -8,18 +8,24 @@ html * {
   line-height: 18px;
 }
 
+body{
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
 .app {
   min-height: 100vh;
+  max-width: 1100px;
+  margin: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
-  color: #434343;
 }
 
 @for $i from 1 through 6 {
-  $fz: 0.5;
-  $lh: 0.4;
+  $fz: 0.35;
+  $lh: 0.25;
   h#{$i} {
     font-size: ($fz*(7-$i))+rem;
     line-height: ($lh*(7-$i))+rem;

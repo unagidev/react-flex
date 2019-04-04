@@ -7,3 +7,4 @@ export * from './wrap';
 export * from './grow';
 export * from './shrink';
 export * from './basis';
+export * from './alignContent';

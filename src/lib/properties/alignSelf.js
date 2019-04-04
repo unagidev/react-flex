@@ -25,5 +25,5 @@ export const getAlignSelf = (align: AlignSelf | Object) => {
     return align;
   }
 
-  return { xs: align || 'auto' };
+  return { xs: align || null };
 };

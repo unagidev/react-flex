@@ -2,20 +2,27 @@ import React, { Fragment } from 'react';
 import Flex from '../../lib';
 import '../App.scss';
 
-const Direction = () => {
+const Wrap = () => {
   return (
     <Fragment>
-      <Flex spacing={['0 0 10px 0', 0]}>
-        <h2>Flex direction</h2>
+      <Flex spacing={['40px 0 10px 0', 0]}>
+        <h2>Flex Wrap</h2>
       </Flex>
       <Flex>
         <Flex direction="column" basis={50}>
           <Flex spacing={[5, 10]}>
-            <h4>Row</h4>
+            <h4>Direction Row</h4>
           </Flex>
-          <Flex className="container" spacing={{ xs: 10, es: 5 }} grow={1}>
-            {[...Array(4)].map((u, i) => (
-              <Flex key={i} spacing={[5, 10]}>
+          <Flex
+            className="container"
+            spacing={{ xs: 10, es: 5 }}
+            align={['start', 'start']}
+            alignContent="start"
+            grow={1}
+            wrap
+          >
+            {[...Array(15)].map((u, i) => (
+              <Flex key={i} spacing={5}>
                 <div className="item">Item {i + 1}</div>
               </Flex>
             ))}
@@ -23,16 +30,19 @@ const Direction = () => {
         </Flex>
         <Flex direction="column" basis={50}>
           <Flex spacing={[5, 10]}>
-            <h4>Column</h4>
+            <h4>Direction Column</h4>
           </Flex>
           <Flex
-            direction="column"
             className="container"
+            direction="column"
             spacing={{ xs: 10, es: 5 }}
+            align="start"
+            alignContent="start"
             wrap
+            style={{ height: 120 }}
           >
-            {[...Array(4)].map((u, i) => (
-              <Flex key={i} spacing={[5, 10]}>
+            {[...Array(15)].map((u, i) => (
+              <Flex key={i} spacing={5}>
                 <div className="item">Item {i + 1}</div>
               </Flex>
             ))}
@@ -43,4 +53,4 @@ const Direction = () => {
   );
 };
 
-export default Direction;
+export default Wrap;
