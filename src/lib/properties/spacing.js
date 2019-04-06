@@ -6,6 +6,7 @@ const getValue = (config: number | string) => {
 };
 
 const getProperty = (config: string[]) => {
+  console.log(config)
   if (config.length === 2 || config.length === 4) {
     return `${config.map(value => getValue(value)).join(' ')}`;
   } else {

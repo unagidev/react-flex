@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 import { getId } from './helpers';
 import type { Breakpoint } from './StyleManager';
 import styleManager from './StyleManager';
-import type { AlignSelf, CrossAxisAlign, MainAxisAlign } from './properties';
+import type {
+  AlignItems,
+  AlignSelf,
+  CrossAxisAlign,
+  JustifyContent,
+  MainAxisAlign
+} from './properties';
 import {
   getAlign,
   getAlignContent,
@@ -19,21 +25,26 @@ import {
   getFillDeclaration,
   getGrow,
   getSpacing,
-  getSpacingDeclaration
+  getSpacingDeclaration,
+  getWrap,
+  getWrapDeclaration,
+  getGap,
+  getGapDeclaration,
+  getJustifyContentDeclaration,
+  getJustifyContent,
+  getAlignItems,
+  getAlignItemsDeclaration
 } from './properties';
-import { getWrap, getWrapDeclaration } from './properties/wrap';
-import { getGap, getGapDeclaration } from './properties/gap';
 import type { AlignContent } from './properties/alignContent';
+import { getContainerGap, getContainerGapDeclaration } from './properties/containerGap';
 
 type Props = {
   children: React$Element<any>,
   className?: string,
   inline?: boolean | { [key: Breakpoint]: boolean },
   direction?: string | { [key: Breakpoint]: string },
-  align?:
-    | MainAxisAlign
-    | [MainAxisAlign, CrossAxisAlign]
-    | { [key: Breakpoint]: MainAxisAlign | [MainAxisAlign, CrossAxisAlign] },
+  justifyContent?: JustifyContent | { [key: Breakpoint]: JustifyContent },
+  alignItems?: AlignItems | { [key: Breakpoint]: AlignItems },
   alignSelf?: AlignContent | { [key: Breakpoint]: AlignContent },
   alignContent?: AlignSelf | { [key: Breakpoint]: AlignSelf },
   fill?: boolean | { [key: Breakpoint]: boolean },
@@ -41,14 +52,18 @@ type Props = {
   grow?: number | { [key: Breakpoint]: number },
   shrink?: number | { [key: Breakpoint]: number },
   basis?: string | number | { [key: Breakpoint]: string | number },
-  gap?: number | { [key: Breakpoint]: number },
+  align?:
+    | MainAxisAlign
+    | [MainAxisAlign, CrossAxisAlign]
+    | { [key: Breakpoint]: MainAxisAlign | [MainAxisAlign, CrossAxisAlign] },
   spacing?: string | { [key: Breakpoint]: string },
-  _layoutGap?: number | { [key: Breakpoint]: number }
+  gap?: number | { [key: Breakpoint]: number },
+  _layoutGap?: number | { [key: Breakpoint]: number },
 };
 
 type State = {
   id: string,
-  rules: Object
+  rules: Object,
 };
 
 class Flex extends Component<Props, State> {
@@ -125,6 +140,20 @@ class Flex extends Component<Props, State> {
       getAlignDeclaration
     );
 
+    // justifyContent
+    this.addRules(
+      ['justify-content'],
+      getJustifyContent(this.props.justifyContent),
+      getJustifyContentDeclaration
+    );
+
+    // alignItems
+    this.addRules(
+      ['align-items'],
+      getAlignItems(this.props.alignItems),
+      getAlignItemsDeclaration
+    );
+
     // alignSelf
     this.addRules(
       ['align-self'],
@@ -163,9 +192,17 @@ class Flex extends Component<Props, State> {
     );
 
     // gap
+    if (this.props.gap) {
+      this.addRules(
+        ['border', 'box-sizing'],
+        getContainerGap(this.props.gap),
+        getContainerGapDeclaration
+      );
+    }
+
     if (this.props._layoutGap) {
       this.addRules(
-        ['padding'],
+        ['border', 'box-sizing'],
         getGap(this.props._layoutGap),
         getGapDeclaration
       );
@@ -191,6 +228,8 @@ class Flex extends Component<Props, State> {
     const {
       children,
       direction,
+      justifyContent,
+      alignItems,
       align,
       alignSelf,
       alignContent,

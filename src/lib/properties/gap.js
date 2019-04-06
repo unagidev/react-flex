@@ -1,11 +1,11 @@
 // @flow
 import { isObj } from '../helpers';
 
-export const getGapDeclaration = (config: number): [string] => {
-  let value = config / 2 + 'px';
-  let property = ` 0 ${value} ${value} 0`;
+export const getGapDeclaration = (config: number): [string, string] => {
+  let property = `solid ${config/2}px transparent`;
+  let property1 = `border-box`;
 
-  return [property];
+  return [property, property1];
 };
 
 export const getGap = (gap: number | Object) => {

@@ -5,8 +5,8 @@ export type AlignContent =
   | 'auto'
   | 'start'
   | 'end'
-  | 'center'
-  | 'baseline'
+  | 'space-between'
+  | 'space-around'
   | 'stretch';
 
 export const getAlignContentDeclaration = (config: AlignContent): [string] => {

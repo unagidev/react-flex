@@ -1,24 +1,35 @@
 import React, { Fragment } from 'react';
 import Flex from '../../lib';
 import '../App.scss';
+import Code from '../components/Code';
 
 const Direction = () => {
   return (
     <Fragment>
-      <Flex spacing={['0 0 10px 0', 0]}>
-        <h2>Flex direction</h2>
+      <Flex spacing={['0 0 20px 0', 0]}>
+        <h2 id="flex-direction">Flex direction</h2>
       </Flex>
-      <Flex>
+      <Flex className="section" spacing={[0, [10, 5]]}>
         <Flex direction="column" basis={50}>
-          <Flex spacing={[5, 10]}>
+          <Flex spacing={[10, 5, 5, 5]}>
             <h4>Row</h4>
           </Flex>
           <Flex className="container" spacing={{ xs: 10, es: 5 }} grow={1}>
             {[...Array(4)].map((u, i) => (
               <Flex key={i} spacing={[5, 10]}>
-                <div className="item">Item {i + 1}</div>
+                <div className="item primary">Item {i + 1}</div>
               </Flex>
             ))}
+          </Flex>
+          <Flex spacing={{ xs: 10, es: 5 }}>
+            <Code>
+              {`<Flex>
+                <div>Item 1</div>
+                <div>Item 2</div>
+                <div>Item 3</div>
+                <div>Item 4</div>
+              </Flex>`}
+            </Code>
           </Flex>
         </Flex>
         <Flex direction="column" basis={50}>
@@ -33,9 +44,19 @@ const Direction = () => {
           >
             {[...Array(4)].map((u, i) => (
               <Flex key={i} spacing={[5, 10]}>
-                <div className="item">Item {i + 1}</div>
+                <div className="item primary">Item {i + 1}</div>
               </Flex>
             ))}
+          </Flex>
+          <Flex spacing={{ xs: 10, es: 5 }}>
+            <Code>
+              {`<Flex direction="column">
+                <div>Item 1</div>
+                <div>Item 2</div>
+                <div>Item 3</div>
+                <div>Item 4</div>
+              </Flex>`}
+            </Code>
           </Flex>
         </Flex>
       </Flex>

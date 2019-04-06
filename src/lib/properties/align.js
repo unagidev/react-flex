@@ -1,6 +1,16 @@
 // @flow
 import { isObj } from '../helpers';
 
+export type Align =
+  | 'start'
+  | 'end'
+  | 'center'
+  | 'space-between'
+  | 'space-around'
+  | 'space-evenly'
+  | 'baseline'
+  | 'stretch';
+
 export type MainAxisAlign =
   | 'start'
   | 'end'
@@ -25,8 +35,23 @@ export const getAlignDeclaration = (
     return [mainAxis, crossAxis];
   }
   if (typeof config === 'string') {
-    mainAxis =
-      config === 'start' || config === 'end' ? `flex-${config}` : config;
+    if (config.split(' ').length > 1) {
+      [mainAxis, crossAxis] = config.split(' ');
+      mainAxis =
+        mainAxis === 'start' || mainAxis === 'end'
+          ? `flex-${mainAxis}`
+          : mainAxis;
+      crossAxis =
+        crossAxis === 'start' || crossAxis === 'end'
+          ? `flex-${crossAxis}`
+          : crossAxis;
+    } else {
+      mainAxis =
+        config === 'start' || config === 'end' ? `flex-${config}` : config;
+      crossAxis =
+        config === 'start' || config === 'end' ? `flex-${config}` : config;
+    }
+
     return [mainAxis, crossAxis];
   }
 

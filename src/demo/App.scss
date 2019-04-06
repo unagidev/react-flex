@@ -1,7 +1,7 @@
 @import './styles/Reset';
 @import url('https://fonts.googleapis.com/css?family=Nunito:200,300,400,400i,600,600i,700,800,900');
 
-html * {
+html {
   font-size: 18px;
   font-family: 'Nunito', sans-serif;
   letter-spacing: 0.5px;
@@ -36,6 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav {
   background: #fff;
   box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+  z-index: 1000;
 
   .title {
     font-size: 25px;
@@ -50,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: 15px;
 }
 
-.main{
+.main {
   max-width: 1100px;
   margin: 40px auto;
 
@@ -67,15 +68,46 @@ h1, h2, h3, h4, h5, h6 {
 //}
 
 .item {
-  background: transparentize(#005b9f, 0.2);
+  background: #495057;
   color: #fafafa;
   font-weight: 600;
-  padding: 5px;
+  padding: 6px;
+  border-radius: 4px;
+
+  &.primary{
+    background: #228BE6;
+  }
+
+  &.success{
+    background: #12B886;
+  }
+
+  &.danger{
+    background: #F03E3E;
+  }
 }
 
 .container {
-  background: #f7f7f7;
-  border: 2px dashed #ddd;
+  background: none rgba(96, 125, 139, 0.1);
+  //border: 2px dashed #ddd;
+  border-radius: 4px;
+}
+
+.section {
+  border-radius: 4px;
+  background: #fff;
+  //box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 6px 12px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 0.25rem 0.125rem 0 rgba(0, 0, 0, 0.025)
+}
+
+pre {
+  background: none rgba(96, 125, 139, 0.1) !important;
+  padding: 5px 10px !important;
+  border-radius: 4px;
+  margin: 0 !important;
+  code{
+    font-size: 14px;
+  }
 }
 
 .full-width {

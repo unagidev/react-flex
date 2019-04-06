@@ -8,17 +8,25 @@ import Grow from './examples/Grow';
 import Shrink from './examples/Shrink';
 import Basis from './examples/Basis';
 import { ReactComponent as Logo } from './logo.svg';
+import AlignSelf from './examples/AlignSelf';
+import JustifyContent from './examples/JustifyContent';
+import AlignItems from './examples/AlignItems';
+import AlignContent from './examples/AlignContent';
+import Gap from './examples/Gap';
 
 const App = () => {
-  const containerSpacing = { xs: [0, 40], es: [0, 10] };
   return (
     <div className="app">
       <Flex className="nav" spacing={[0, [30, 20]]} align="space-between">
         <Flex align={['start', 'center']}>
-          <Logo className="logo" />
+          <Logo className="logo"/>
           <div className="title">React Flex</div>
         </Flex>
-        <Flex>Github</Flex>
+        <Flex align={['end', 'center']}>
+          <Flex spacing={[0, 10]}>Static</Flex>
+          <Flex spacing={[0, 10]}>Responsive</Flex>
+          <Flex spacing={[0, 10]}>Github</Flex>
+        </Flex>
       </Flex>
       <Flex
         style={{ overflow: 'auto', display: 'block' }}
@@ -26,12 +34,18 @@ const App = () => {
         fill
       >
         <Flex className="main" direction="column">
-          <Direction />
-          <Align />
-          <Wrap />
-          <Grow />
-          <Shrink />
-          <Basis />
+          <Direction/>
+          <JustifyContent/>
+          <AlignItems/>
+          <AlignSelf/>
+          <Wrap/>
+          <AlignContent/>
+          <Basis/>
+          <Grow/>
+          <Shrink/>
+
+          <Align/>
+          <Gap/>
         </Flex>
       </Flex>
     </div>
