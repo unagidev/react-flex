@@ -15,3 +15,7 @@ export * from './align';
 export * from './spacing';
 export * from './gap';
 export * from './fill';
+
+import { align } from './align';
+
+export default [align];

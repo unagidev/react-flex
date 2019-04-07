@@ -5,7 +5,7 @@ import Code from '../components/Code';
 const DirectionRow = () => {
   return (
     <Flex direction="column" basis={50}>
-      <Flex className="container" grow={1} spacing={{ xs: 10, es: 5 }}>
+      <Flex className="container" grow={1} spacing={{ xs:10, es: 5 }}>
         <Flex gap={10} fill wrap>
           {[...Array(12)].map((u, i) => (
             <Flex key={i} basis={25}>

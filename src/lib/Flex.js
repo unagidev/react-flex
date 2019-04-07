@@ -35,8 +35,12 @@ import {
   getAlignItems,
   getAlignItemsDeclaration
 } from './properties';
+import properties from './properties';
 import type { AlignContent } from './properties/alignContent';
-import { getContainerGap, getContainerGapDeclaration } from './properties/containerGap';
+import {
+  getContainerGap,
+  getContainerGapDeclaration
+} from './properties/containerGap';
 
 type Props = {
   children: React$Element<any>,
@@ -47,7 +51,6 @@ type Props = {
   alignItems?: AlignItems | { [key: Breakpoint]: AlignItems },
   alignSelf?: AlignContent | { [key: Breakpoint]: AlignContent },
   alignContent?: AlignSelf | { [key: Breakpoint]: AlignSelf },
-  fill?: boolean | { [key: Breakpoint]: boolean },
   wrap?: boolean | { [key: Breakpoint]: boolean },
   grow?: number | { [key: Breakpoint]: number },
   shrink?: number | { [key: Breakpoint]: number },
@@ -58,6 +61,13 @@ type Props = {
     | { [key: Breakpoint]: MainAxisAlign | [MainAxisAlign, CrossAxisAlign] },
   spacing?: string | { [key: Breakpoint]: string },
   gap?: number | { [key: Breakpoint]: number },
+  fill?: boolean | { [key: Breakpoint]: boolean },
+  size?:
+    | string
+    | [string, string]
+    | { [key: Breakpoint]: string | [string, string] },
+  minSize?: string | { [key: Breakpoint]: string },
+  maxSize?: string | { [key: Breakpoint]: string },
   _layoutGap?: number | { [key: Breakpoint]: number },
 };
 
@@ -72,7 +82,6 @@ class Flex extends Component<Props, State> {
     rules: {}
   };
   children = React.Children.map(this.props.children, child => {
-    // console.log(child);
     if (child && child.type && child.type.name === 'Flex') {
       return React.cloneElement(child, {
         _layoutGap: this.props.gap
@@ -133,12 +142,15 @@ class Flex extends Component<Props, State> {
     // direction
     this.addRules(['flex-direction'], getDirection(this.props.direction));
 
-    // align
-    this.addRules(
-      ['justify-content', 'align-items'],
-      getAlign(this.props.align),
-      getAlignDeclaration
-    );
+    properties.forEach(property => {
+      if (this.props[property.name]) {
+        this.addRules(
+          property.cssProperties,
+          property.format(this.props[property.name]),
+          property.getDeclaration
+        );
+      }
+    });
 
     // justifyContent
     this.addRules(
@@ -221,6 +233,7 @@ class Flex extends Component<Props, State> {
     this.buildRules();
     const prefix = 'flex';
     const className = styleManager.addClass(id, this.state.rules);
+    // console.log(id, this.props);
     return `${prefix} ${className} ${this.props.className || ''}`;
   }
 

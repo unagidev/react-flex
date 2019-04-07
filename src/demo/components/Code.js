@@ -27,7 +27,6 @@ const Code = props => {
     }
     return line;
   });
-  console.log(lines);
 
   return (
     <SyntaxHighlighter className="full-width" language="jsx" style={coy}>
