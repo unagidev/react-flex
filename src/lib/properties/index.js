@@ -17,5 +17,10 @@ export * from './gap';
 export * from './fill';
 
 import { align } from './align';
+import { justifyContent } from './justifyContent';
+import { alignItems } from './alignItems';
+import { alignSelf } from './alignSelf';
+import { alignContent } from './alignContent';
+import { direction } from './direction';
 
-export default [align];
+export default [direction, align, justifyContent, alignItems, alignSelf, alignContent];

@@ -8,15 +8,9 @@ import type {
   AlignSelf,
   CrossAxisAlign,
   JustifyContent,
-  MainAxisAlign
+  MainAxisAlign,
 } from './properties';
 import {
-  getAlign,
-  getAlignContent,
-  getAlignContentDeclaration,
-  getAlignDeclaration,
-  getAlignSelf,
-  getAlignSelfDeclaration,
   getBasis,
   getBasisDeclaration,
   getDirection,
@@ -30,16 +24,12 @@ import {
   getWrapDeclaration,
   getGap,
   getGapDeclaration,
-  getJustifyContentDeclaration,
-  getJustifyContent,
-  getAlignItems,
-  getAlignItemsDeclaration
 } from './properties';
 import properties from './properties';
 import type { AlignContent } from './properties/alignContent';
 import {
   getContainerGap,
-  getContainerGapDeclaration
+  getContainerGapDeclaration,
 } from './properties/containerGap';
 
 type Props = {
@@ -79,12 +69,12 @@ type State = {
 class Flex extends Component<Props, State> {
   state = {
     id: '',
-    rules: {}
+    rules: {},
   };
   children = React.Children.map(this.props.children, child => {
     if (child && child.type && child.type.name === 'Flex') {
       return React.cloneElement(child, {
-        _layoutGap: this.props.gap
+        _layoutGap: this.props.gap,
       });
     }
     return child;
@@ -117,7 +107,7 @@ class Flex extends Component<Props, State> {
   addRules = (
     propKeys: string[],
     props: { [key: Breakpoint]: string },
-    getPropValues: ?(props: Object) => [string, ?string]
+    getPropValues: ?(props: Object) => string[] | null,
   ) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
     breakpoints.forEach(breakpoint => {
@@ -139,46 +129,15 @@ class Flex extends Component<Props, State> {
   buildRules() {
     this.addRule('xs', getDisplay(this.props.item));
 
-    // direction
-    this.addRules(['flex-direction'], getDirection(this.props.direction));
-
     properties.forEach(property => {
       if (this.props[property.name]) {
         this.addRules(
           property.cssProperties,
           property.format(this.props[property.name]),
-          property.getDeclaration
+          property.getDeclaration,
         );
       }
     });
-
-    // justifyContent
-    this.addRules(
-      ['justify-content'],
-      getJustifyContent(this.props.justifyContent),
-      getJustifyContentDeclaration
-    );
-
-    // alignItems
-    this.addRules(
-      ['align-items'],
-      getAlignItems(this.props.alignItems),
-      getAlignItemsDeclaration
-    );
-
-    // alignSelf
-    this.addRules(
-      ['align-self'],
-      getAlignSelf(this.props.alignSelf),
-      getAlignSelfDeclaration
-    );
-
-    // alignContent
-    this.addRules(
-      ['align-content'],
-      getAlignContent(this.props.alignContent),
-      getAlignContentDeclaration
-    );
 
     // fill
     this.addRules(['flex'], getFill(this.props.fill), getFillDeclaration);
@@ -200,7 +159,7 @@ class Flex extends Component<Props, State> {
     this.addRules(
       ['flex-basis'],
       getBasis(this.props.basis),
-      getBasisDeclaration
+      getBasisDeclaration,
     );
 
     // gap
@@ -208,7 +167,7 @@ class Flex extends Component<Props, State> {
       this.addRules(
         ['border', 'box-sizing'],
         getContainerGap(this.props.gap),
-        getContainerGapDeclaration
+        getContainerGapDeclaration,
       );
     }
 
@@ -216,7 +175,7 @@ class Flex extends Component<Props, State> {
       this.addRules(
         ['border', 'box-sizing'],
         getGap(this.props._layoutGap),
-        getGapDeclaration
+        getGapDeclaration,
       );
     }
 
@@ -224,7 +183,7 @@ class Flex extends Component<Props, State> {
     this.addRules(
       ['margin', 'padding'],
       getSpacing(this.props.spacing),
-      getSpacingDeclaration
+      getSpacingDeclaration,
     );
   }
 

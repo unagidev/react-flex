@@ -1,5 +1,5 @@
 // @flow
-import { isObj } from '../helpers';
+import Property from './base';
 
 export type JustifyContent =
   | 'start'
@@ -9,23 +9,19 @@ export type JustifyContent =
   | 'space-around'
   | 'space-evenly';
 
-export const getJustifyContentDeclaration = (
-  config: JustifyContent
-): [string | null] => {
-  let justifyContent = null;
-  if (typeof config === 'undefined') {
+class JustifyContentProp extends Property {
+  getDeclaration(config: JustifyContent): [string | null, null] {
+    let justifyContent = null;
+    if (typeof config === 'undefined') {
+      return [justifyContent];
+    }
+
+    justifyContent =
+      config === 'start' || config === 'end' ? `flex-${config}` : config;
     return [justifyContent];
   }
+}
 
-  justifyContent =
-    config === 'start' || config === 'end' ? `flex-${config}` : config;
-  return [justifyContent];
-};
-
-export const getJustifyContent = (align: JustifyContent | Object) => {
-  if (isObj(align)) {
-    return align;
-  }
-
-  return { xs: align || null };
-};
+export const justifyContent = new JustifyContentProp('justifyContent', [
+  'justify-content',
+]);

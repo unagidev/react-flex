@@ -1,5 +1,5 @@
 // @flow
-import { isObj } from '../helpers';
+import Property from './base';
 
 export type AlignSelf =
   | 'auto'
@@ -9,21 +9,17 @@ export type AlignSelf =
   | 'baseline'
   | 'stretch';
 
-export const getAlignSelfDeclaration = (config: AlignSelf): [string] => {
-  let alignSelf = 'auto';
-  if (typeof config === 'undefined') {
+class AlignSelfProp extends Property {
+  getDeclaration(config: AlignSelf): [string | null] {
+    let alignSelf = null;
+    if (typeof config === 'undefined') {
+      return [alignSelf];
+    }
+
+    alignSelf =
+      config === 'start' || config === 'end' ? `flex-${config}` : config;
     return [alignSelf];
   }
+}
 
-  alignSelf =
-    config === 'start' || config === 'end' ? `flex-${config}` : config;
-  return [alignSelf];
-};
-
-export const getAlignSelf = (align: AlignSelf | Object) => {
-  if (isObj(align)) {
-    return align;
-  }
-
-  return { xs: align || null };
-};
+export const alignSelf = new AlignSelfProp('alignSelf', ['align-self']);
