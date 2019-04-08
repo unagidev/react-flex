@@ -73,7 +73,7 @@ class StyleManager {
   _getMediaRules(rules: RulesMap): string {
     const out = [];
     rules.forEach((rule, key) => {
-      out.push(`.fx-${key}{ ${rule.join(' ')} }`);
+      out.push(`.flex-${key}{ ${rule.join(' ')} }`);
     });
     return out.join('\n');
   }
@@ -89,7 +89,7 @@ class StyleManager {
           rules.unshift(`${breakpoint} { ${mediaRules} }`);
         } else {
           rule.forEach((mRule, key) => {
-            rules.push(`.fx-${key}{ ${mRule.join(' ')} }`);
+            rules.push(`.flex-${key}{ ${mRule.join(' ')} }`);
           });
         }
       }
@@ -123,7 +123,7 @@ class StyleManager {
 
     this._updateSheet();
 
-    return `fx-${id}`;
+    return `flex-${id}`;
   }
 
   removeClass(id: string) {

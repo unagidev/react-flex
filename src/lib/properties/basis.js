@@ -1,27 +1,23 @@
 // @flow
-import { isObj } from '../helpers';
+import Property from './base';
 
-export const getBasisDeclaration = (
-  config: string | number | Object[]
-): [string] => {
-  let basis = null;
-  if (typeof config === 'undefined') {
+class Basis extends Property {
+  getDeclaration(config: string | number): [string | null] {
+    let basis = null;
+    if (typeof config === 'undefined') {
+      return [basis];
+    }
+    if (typeof config === 'number') {
+      basis = `${config}%`;
+      return [basis];
+    }
+    if (typeof config === 'string') {
+      basis = config;
+      return [basis];
+    }
+
     return [basis];
   }
-  if (typeof config === 'number') {
-    basis = `${config}%`;
-    return [basis];
-  }
-  if (typeof config === 'string') {
-    basis = config;
-    return [basis];
-  }
-};
+}
 
-export const getBasis = (basis: string | number | Object) => {
-  if (isObj(basis)) {
-    return basis;
-  }
-
-  return { xs: basis || null };
-};
+export const basis = new Basis('basis', ['flex-basis']);

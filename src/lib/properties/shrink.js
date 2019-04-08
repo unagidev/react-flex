@@ -1,10 +1,4 @@
 // @flow
-import { isObj } from '../helpers';
+import Property from './base';
 
-export const getShrink = (shrink: number | Object) => {
-  if (isObj(shrink)) {
-    return shrink;
-  }
-
-  return { xs: shrink };
-};
+export const shrink = new Property('shrink', ['flex-shrink']);

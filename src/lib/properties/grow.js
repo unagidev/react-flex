@@ -1,10 +1,4 @@
 // @flow
-import { isObj } from '../helpers';
+import Property from './base';
 
-export const getGrow = (grow: number | Object) => {
-  if (isObj(grow)) {
-    return grow;
-  }
-
-  return { xs: grow };
-};
+export const grow = new Property('grow', ['flex-grow']);

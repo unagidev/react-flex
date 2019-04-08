@@ -1,19 +1,15 @@
 // @flow
-import { isObj } from '../helpers';
+import Property from './base';
 
-export const getFillDeclaration = (config: boolean): [string | null] => {
-  let fill = null;
-  if (typeof config === 'undefined') {
-    return [fill];
+class Fill extends Property {
+  getDeclaration(config: boolean): [string | null] {
+    let fill = null;
+    if (typeof config === 'undefined') {
+      return [fill];
+    }
+
+    return config ? ['1 1 100%'] : [null];
   }
+}
 
-  return config ? ['1 1 100%'] : [null];
-};
-
-export const getFill = (fill: boolean | Object) => {
-  if (isObj(fill)) {
-    return fill;
-  }
-
-  return { xs: fill };
-};
+export const fill = new Fill('fill', ['flex']);

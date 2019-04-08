@@ -1,7 +1,7 @@
 // @flow
 import Property from './base';
 
-class Gap extends Property {
+class LayoutGap extends Property {
   getDeclaration(config: number): [string | null, string | null] {
     if (config) {
       let property = `solid ${config / 2}px transparent`;
@@ -14,4 +14,4 @@ class Gap extends Property {
   }
 }
 
-export const gap = new Gap('gap', ['border', 'box-sizing']);
+export const layoutGap = new LayoutGap('layoutGap', ['border', 'box-sizing']);

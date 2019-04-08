@@ -10,27 +10,9 @@ import type {
   JustifyContent,
   MainAxisAlign,
 } from './properties';
-import {
-  getBasis,
-  getBasisDeclaration,
-  getDirection,
-  getDisplay,
-  getFill,
-  getFillDeclaration,
-  getGrow,
-  getSpacing,
-  getSpacingDeclaration,
-  getWrap,
-  getWrapDeclaration,
-  getGap,
-  getGapDeclaration,
-} from './properties';
+import { getDisplay } from './properties';
 import properties from './properties';
 import type { AlignContent } from './properties/alignContent';
-import {
-  getContainerGap,
-  getContainerGapDeclaration,
-} from './properties/containerGap';
 
 type Props = {
   children: React$Element<any>,
@@ -58,7 +40,6 @@ type Props = {
     | { [key: Breakpoint]: string | [string, string] },
   minSize?: string | { [key: Breakpoint]: string },
   maxSize?: string | { [key: Breakpoint]: string },
-  _layoutGap?: number | { [key: Breakpoint]: number },
 };
 
 type State = {
@@ -74,7 +55,7 @@ class Flex extends Component<Props, State> {
   children = React.Children.map(this.props.children, child => {
     if (child && child.type && child.type.name === 'Flex') {
       return React.cloneElement(child, {
-        _layoutGap: this.props.gap,
+        layoutGap: this.props.gap,
       });
     }
     return child;
@@ -139,52 +120,12 @@ class Flex extends Component<Props, State> {
       }
     });
 
-    // fill
-    this.addRules(['flex'], getFill(this.props.fill), getFillDeclaration);
-
-    // wrap
-    this.addRules(['flex-wrap'], getWrap(this.props.wrap), getWrapDeclaration);
-
-    // grow
-    if (this.props.grow) {
-      this.addRules(['flex-grow'], getGrow(this.props.grow));
-    }
-
-    // shrink
-    if (this.props.shrink) {
-      this.addRules(['flex-shrink'], getGrow(this.props.shrink));
-    }
-
-    // basis
-    this.addRules(
-      ['flex-basis'],
-      getBasis(this.props.basis),
-      getBasisDeclaration,
-    );
-
-    // gap
-    if (this.props.gap) {
-      this.addRules(
-        ['border', 'box-sizing'],
-        getContainerGap(this.props.gap),
-        getContainerGapDeclaration,
-      );
-    }
-
-    if (this.props._layoutGap) {
-      this.addRules(
-        ['border', 'box-sizing'],
-        getGap(this.props._layoutGap),
-        getGapDeclaration,
-      );
-    }
-
-    // spacing
-    this.addRules(
-      ['margin', 'padding'],
-      getSpacing(this.props.spacing),
-      getSpacingDeclaration,
-    );
+    // // spacing
+    // this.addRules(
+    //   ['margin', 'padding'],
+    //   getSpacing(this.props.spacing),
+    //   getSpacingDeclaration
+    // );
   }
 
   getClass() {
@@ -192,7 +133,6 @@ class Flex extends Component<Props, State> {
     this.buildRules();
     const prefix = 'flex';
     const className = styleManager.addClass(id, this.state.rules);
-    // console.log(id, this.props);
     return `${prefix} ${className} ${this.props.className || ''}`;
   }
 
@@ -209,7 +149,7 @@ class Flex extends Component<Props, State> {
       wrap,
       grow,
       gap,
-      _layoutGap,
+      layoutGap,
       basis,
       shrink,
       fill,
