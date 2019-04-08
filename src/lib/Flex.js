@@ -3,16 +3,13 @@ import React, { Component } from 'react';
 import { getId } from './helpers';
 import type { Breakpoint } from './StyleManager';
 import styleManager from './StyleManager';
-import type {
-  AlignItems,
-  AlignSelf,
-  CrossAxisAlign,
-  JustifyContent,
-  MainAxisAlign,
-} from './properties';
-import { getDisplay } from './properties';
+import { getDisplay } from './properties/display';
 import properties from './properties';
 import type { AlignContent } from './properties/alignContent';
+import type { JustifyContent } from './properties/justifyContent';
+import type { AlignItems } from './properties/alignItems';
+import type { AlignSelf } from './properties/alignSelf';
+import type { MainAxisAlign, CrossAxisAlign } from './properties/align';
 
 type Props = {
   children: React$Element<any>,
@@ -40,6 +37,8 @@ type Props = {
     | { [key: Breakpoint]: string | [string, string] },
   minSize?: string | { [key: Breakpoint]: string },
   maxSize?: string | { [key: Breakpoint]: string },
+  show?: boolean | { [key: Breakpoint]: boolean },
+  hide?: boolean | { [key: Breakpoint]: boolean },
 };
 
 type State = {
@@ -119,13 +118,6 @@ class Flex extends Component<Props, State> {
         );
       }
     });
-
-    // // spacing
-    // this.addRules(
-    //   ['margin', 'padding'],
-    //   getSpacing(this.props.spacing),
-    //   getSpacingDeclaration
-    // );
   }
 
   getClass() {
@@ -153,6 +145,11 @@ class Flex extends Component<Props, State> {
       basis,
       shrink,
       fill,
+      size,
+      maxSize,
+      minSize,
+      show,
+      hide,
       className,
       ...rest
     } = this.props;
