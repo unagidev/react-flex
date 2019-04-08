@@ -9,7 +9,7 @@ import type { AlignContent } from './properties/alignContent';
 import type { JustifyContent } from './properties/justifyContent';
 import type { AlignItems } from './properties/alignItems';
 import type { AlignSelf } from './properties/alignSelf';
-import type { MainAxisAlign, CrossAxisAlign } from './properties/align';
+import type { CrossAxisAlign, MainAxisAlign } from './properties/align';
 
 type Props = {
   children: React$Element<any>,
@@ -61,6 +61,9 @@ class Flex extends Component<Props, State> {
   });
 
   componentWillMount(): void {
+    if (this.props.show && this.props.hide) {
+      throw Error('show & hide can not be combined');
+    }
     const id = getId();
     this.setState({ id: id });
   }
@@ -107,7 +110,7 @@ class Flex extends Component<Props, State> {
   };
 
   buildRules() {
-    this.addRule('xs', getDisplay(this.props.item));
+    this.addRule('xs', getDisplay(this.props.inline, this.props.show || this.props.hide));
 
     properties.forEach(property => {
       if (this.props[property.name]) {

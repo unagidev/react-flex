@@ -9,8 +9,8 @@ const Direction = () => {
       <Flex spacing={['0 0 20px 0', 0]}>
         <h2 id="flex-direction">Flex direction</h2>
       </Flex>
-      <Flex className="section" spacing={[0, [10, 5]]}>
-        <Flex direction="column" basis={50}>
+      <Flex className="section" gap={{xs:20, sm: 10, es:5}} wrap>
+        <Flex direction="column" basis={50} grow={1}>
           <Flex spacing={[10, 5, 5, 5]}>
             <h4>Row</h4>
           </Flex>
@@ -32,7 +32,7 @@ const Direction = () => {
             </Code>
           </Flex>
         </Flex>
-        <Flex direction="column" basis={50}>
+        <Flex direction="column" basis={50} grow={1}>
           <Flex spacing={[5, 10]}>
             <h4>Column</h4>
           </Flex>

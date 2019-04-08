@@ -1,7 +1,16 @@
 // @flow
 import { getId, isObj } from './helpers';
 
-type Breakpoint = 'xs' | 'es' | 'sm' | 'md' | 'lg' | 'es' | 'xl';
+type Breakpoint =
+  | 'xs'
+  | 'es'
+  | 'gtEs'
+  | 'sm'
+  | 'gtSm'
+  | 'md'
+  | 'gtMd'
+  | 'lg'
+  | 'xl';
 
 type Breakpoints = {
   xs?: any,
@@ -10,7 +19,7 @@ type Breakpoints = {
   md?: any,
   lg?: any,
   es?: any,
-  xl?: any
+  xl?: any,
 };
 type BreakpointRules = {
   xs?: string[],
@@ -19,7 +28,7 @@ type BreakpointRules = {
   md?: string[],
   lg?: string[],
   es?: string[],
-  xl?: string[]
+  xl?: string[],
 };
 type RulesMap = Map<string, string[]>;
 type MediaRulesMap = Map<string, RulesMap>;
@@ -28,10 +37,13 @@ class StyleManager {
   breakpoints: Breakpoints = {
     xs: `@media screen and (min-width : 0)`,
     es: `@media screen and (max-width : 575px)`,
+    gtEs: `@media screen and (min-width : 576px)`,
     sm: `@media screen and (min-width : 576px) and (max-width : 767px)`,
+    gtSm: `@media screen and (min-width : 768px)`,
     md: `@media screen and (min-width : 768px) and (max-width : 991px)`,
+    gtMd: `@media screen and (min-width : 992px)`,
     lg: `@media screen and (min-width : 992px) and (max-width : 1199px)`,
-    xl: `@media screen and (min-width : 1200px)`
+    xl: `@media screen and (min-width : 1200px)`,
   };
 
   _sheetId: string;
