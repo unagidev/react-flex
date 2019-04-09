@@ -18,7 +18,7 @@ export default class Property {
     return { xs: property || null };
   }
 
-  getDeclaration(config: any = null): string[] | null {
+  getValues(config: any = null): string[] | null {
     return [config];
   }
 }

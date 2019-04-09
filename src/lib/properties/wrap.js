@@ -21,7 +21,7 @@ export const getWrap = (wrap: boolean | Object) => {
 };
 
 class Wrap extends Property {
-  getDeclaration(config: JustifyContent): [string | null] {
+  getValues(config: JustifyContent): [string | null] {
     if (typeof config === 'undefined') {
       return [wrap];
     }

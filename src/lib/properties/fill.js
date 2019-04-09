@@ -2,7 +2,7 @@
 import Property from './base';
 
 class Fill extends Property {
-  getDeclaration(config: boolean): [string | null] {
+  getValues(config: boolean): [string | null] {
     let fill = null;
     if (typeof config === 'undefined') {
       return [fill];

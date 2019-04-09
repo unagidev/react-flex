@@ -10,7 +10,7 @@ export type JustifyContent =
   | 'space-evenly';
 
 class JustifyContentProp extends Property {
-  getDeclaration(config: JustifyContent): [string | null, null] {
+  getValues(config: JustifyContent): [string | null, null] {
     let justifyContent = null;
     if (typeof config === 'undefined') {
       return [justifyContent];

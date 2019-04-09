@@ -31,7 +31,7 @@ export const getAlignContent = (align: AlignContent | Object) => {
 };
 
 class AlignContentProp extends Property {
-  getDeclaration(config: AlignContent): [string | null, null] {
+  getValues(config: AlignContent): [string | null, null] {
     let alignContent = null;
     if (typeof config === 'undefined') {
       return [alignContent];

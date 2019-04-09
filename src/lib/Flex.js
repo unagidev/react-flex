@@ -88,28 +88,28 @@ class Flex extends Component<Props, State> {
   };
 
   addRules = (
-    propKeys: string[],
-    props: { [key: Breakpoint]: string },
-    getPropValues: ?(props: Object) => string[] | null,
+    cssProps: string[],
+    prop: { [key: Breakpoint]: string },
+    getValues: ?(props: Object) => string[] | null,
   ) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
     breakpoints.forEach(breakpoint => {
-      if (props[breakpoint]) {
-        if (getPropValues) {
-          const propValues = getPropValues(props[breakpoint]);
-          propValues.forEach((propValue, i) => {
-            if (propValue) {
-              this.addRule(breakpoint, `${propKeys[i]}: ${propValue};`);
+      if (prop[breakpoint]) {
+        if (getValues) {
+          const values = getValues(prop[breakpoint]);
+          values.forEach((value, i) => {
+            if (value) {
+              this.addRule(breakpoint, `${cssProps[i]}: ${value};`);
             }
           });
         } else {
-          this.addRule(breakpoint, `${propKeys[0]}: ${props[breakpoint]};`);
+          this.addRule(breakpoint, `${cssProps[0]}: ${prop[breakpoint]};`);
         }
       }
     });
   };
 
-  buildRules() {
+  buildRuleSet() {
     this.addRule('xs', getDisplay(this.props.inline, this.props.show || this.props.hide));
 
     properties.forEach(property => {
@@ -117,7 +117,17 @@ class Flex extends Component<Props, State> {
         this.addRules(
           property.cssProperties,
           property.format(this.props[property.name]),
-          property.getDeclaration,
+          propertyValue => {
+            const isDispaly = property.cssProperties[0] === 'display';
+            if (isDispaly) {
+              const inline = this.props.inline;
+              property.getValues(() => {
+                return { inline, propertyValue };
+              });
+              return property.getValues(propertyValue);
+            }
+            return property.getValues(propertyValue);
+          },
         );
       }
     });
@@ -125,7 +135,7 @@ class Flex extends Component<Props, State> {
 
   getClass() {
     const { id } = this.state;
-    this.buildRules();
+    this.buildRuleSet();
     const prefix = 'flex';
     const className = styleManager.addClass(id, this.state.rules);
     return `${prefix} ${className} ${this.props.className || ''}`;

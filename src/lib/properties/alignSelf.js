@@ -10,7 +10,7 @@ export type AlignSelf =
   | 'stretch';
 
 class AlignSelfProp extends Property {
-  getDeclaration(config: AlignSelf): [string | null] {
+  getValues(config: AlignSelf): [string | null] {
     let alignSelf = null;
     if (typeof config === 'undefined') {
       return [alignSelf];

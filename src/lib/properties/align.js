@@ -17,7 +17,7 @@ export type CrossAxisAlign =
   | 'stretch';
 
 class Align extends Property {
-  getDeclaration(config: string | [MainAxisAlign, CrossAxisAlign]): string[] {
+  getValues(config: string | [MainAxisAlign, CrossAxisAlign]): string[] {
     let mainAxis = null;
     let crossAxis = null;
     if (typeof config === 'undefined') {

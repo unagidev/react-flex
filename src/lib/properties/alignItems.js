@@ -4,7 +4,7 @@ import Property from './base';
 export type AlignItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
 
 class AlignItemsProp extends Property {
-  getDeclaration(config: AlignItems): [string | null, null] {
+  getValues(config: AlignItems): [string | null] {
     let alignItems = null;
     if (typeof config === 'undefined') {
       return [alignItems];

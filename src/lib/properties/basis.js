@@ -2,7 +2,7 @@
 import Property from './base';
 
 class Basis extends Property {
-  getDeclaration(config: string | number): [string | null] {
+  getValues(config: string | number): [string | null] {
     let basis = null;
     if (typeof config === 'undefined') {
       return [basis];

@@ -14,7 +14,7 @@ class Spacing extends Property {
     }
   }
 
-  getDeclaration(
+  getValues(
     config: string | number | Object[]
   ): [string | null, string | null] {
     let margin = null;

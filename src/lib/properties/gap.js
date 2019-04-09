@@ -2,7 +2,7 @@
 import Property from './base';
 
 class Gap extends Property {
-  getDeclaration(config: number): [string | null, string | null] {
+  getValues(config: number): [string | null, string | null] {
     if (config) {
       let property = `solid ${config / 2}px transparent`;
       let property1 = `border-box`;
