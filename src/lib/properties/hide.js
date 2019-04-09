@@ -6,15 +6,14 @@ export const getDisplay = (inline: boolean = false, hide: boolean = false) => {
   return hide ? 'display:none;' : `display:${inline ? 'inline-flex' : 'flex'};`;
 };
 
-class Show extends Property {
+class Hide extends Property {
   format(property: string | Object) {
-    console.log(property);
     if (isObj(property)) {
       return property;
     }
 
     if (typeof property === 'undefined') {
-      return { xs: true };
+      return { xs: false };
     }
 
     return { xs: property };
@@ -22,12 +21,11 @@ class Show extends Property {
 
   getValues(config: Object): string[] {
     const { inline, propertyValue } = config;
-    console.log(inline, propertyValue);
-    const display = propertyValue
+    const display = !propertyValue
       ? `${inline ? 'inline-flex' : 'flex'};`
       : 'none;';
     return [display];
   }
 }
 
-export const show = new Show('show', ['display']);
+export const hide = new Hide('hide', ['display']);

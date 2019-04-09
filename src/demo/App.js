@@ -19,10 +19,10 @@ const App = () => {
     <div className="app">
       <Flex className="nav" spacing={[0, [30, 20]]} align="space-between">
         <Flex align={['start', 'center']}>
-          <Logo className="logo"/>
+          <Logo className="logo" />
           <div className="title">React Flex</div>
         </Flex>
-        <Flex align={['end', 'center']}>
+        <Flex align={['end', 'center']} show={{ xs: false, gtEs: true }}>
           <Flex spacing={[0, 10]}>Static</Flex>
           <Flex spacing={[0, 10]}>Responsive</Flex>
           <Flex spacing={[0, 10]}>Github</Flex>
@@ -34,18 +34,18 @@ const App = () => {
         fill
       >
         <Flex className="main" direction="column">
-          <Direction/>
-          <JustifyContent/>
-          <AlignItems/>
-          <AlignSelf/>
-          <Wrap/>
-          <AlignContent/>
-          <Basis/>
-          <Grow/>
-          <Shrink/>
+          <Direction />
+          <JustifyContent />
+          <AlignItems />
+          <AlignSelf />
+          <Wrap />
+          <AlignContent />
+          <Basis />
+          <Grow />
+          <Shrink />
 
-          <Align/>
-          <Gap/>
+          <Align />
+          <Gap />
         </Flex>
       </Flex>
     </div>

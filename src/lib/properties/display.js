@@ -3,7 +3,7 @@ import Property from './base';
 import { isObj } from '../helpers';
 
 export const getDisplay = (inline: boolean = false, hide: boolean = false) => {
-  return hide ? 'display:none;' : `display:${inline ? 'inline-flex' : 'flex'};`;
+  return `display:${inline ? 'inline-flex' : 'flex'};`;
 };
 
 

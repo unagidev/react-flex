@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { getId } from './helpers';
 import type { Breakpoint } from './StyleManager';
 import styleManager from './StyleManager';
-import { getDisplay } from './properties/display';
 import properties from './properties';
 import type { AlignContent } from './properties/alignContent';
 import type { JustifyContent } from './properties/justifyContent';
@@ -94,7 +93,7 @@ class Flex extends Component<Props, State> {
   ) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
     breakpoints.forEach(breakpoint => {
-      if (prop[breakpoint]) {
+      if (prop[breakpoint] || typeof prop[breakpoint] === 'boolean') {
         if (getValues) {
           const values = getValues(prop[breakpoint]);
           values.forEach((value, i) => {
@@ -110,7 +109,7 @@ class Flex extends Component<Props, State> {
   };
 
   buildRuleSet() {
-    this.addRule('xs', getDisplay(this.props.inline, this.props.show || this.props.hide));
+    // this.addRule('xs', getDisplay(this.props.inline));
 
     properties.forEach(property => {
       if (this.props[property.name]) {
@@ -118,17 +117,26 @@ class Flex extends Component<Props, State> {
           property.cssProperties,
           property.format(this.props[property.name]),
           propertyValue => {
-            const isDispaly = property.cssProperties[0] === 'display';
-            if (isDispaly) {
+            const isDisplay = property.cssProperties[0] === 'display';
+            if (isDisplay) {
               const inline = this.props.inline;
-              property.getValues(() => {
-                return { inline, propertyValue };
-              });
-              return property.getValues(propertyValue);
+              return property.getValues({ inline, propertyValue });
             }
             return property.getValues(propertyValue);
           },
         );
+      } else {
+        const isShow = property.name === 'show';
+        if (isShow) {
+          this.addRules(
+            property.cssProperties,
+            property.format(this.props[property.name]),
+            propertyValue => {
+              const inline = this.props.inline;
+              return property.getValues({ inline, propertyValue });
+            },
+          );
+        }
       }
     });
   }

@@ -12,6 +12,8 @@ import { basis } from './basis';
 import { gap } from './gap';
 import { layoutGap } from './layoutGap';
 import { spacing } from './spacing';
+import { show } from './show';
+import { hide } from './hide';
 
 export default [
   direction,
@@ -28,4 +30,6 @@ export default [
   gap,
   layoutGap,
   spacing,
+  show,
+  hide,
 ];

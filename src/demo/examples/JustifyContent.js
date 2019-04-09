@@ -5,12 +5,13 @@ import Code from '../components/Code';
 const Example = ({ direction }) => {
   return (
     <Flex direction="column">
-      <Flex gap={{ xs: 20, sm: 10 }} wrap>
-        <Flex basis={50} grow={1}>
+      <Flex gap={{ xs: 20, sm: 10, es: 5 }} wrap>
+        <Flex basis={{ xs: 100, gtEs: 50 }} grow={1}>
           <Flex
             className="container"
             justifyContent={direction || 'start'}
             fill
+            wrap
           >
             {[...Array(4)].map((u, i) => (
               <Flex key={i} spacing={[5, 10]}>
@@ -19,7 +20,7 @@ const Example = ({ direction }) => {
             ))}
           </Flex>
         </Flex>
-        <Flex basis={50} grow={1}>
+        <Flex basis={{ xs: 100, gtEs: 50 }} grow={1} wrap style={{ overflow: 'auto' }}>
           <Code>
             {`<Flex justifyContent="${direction || 'start'}">
               ...
