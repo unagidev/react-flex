@@ -14,6 +14,9 @@ import { layoutGap } from './layoutGap';
 import { spacing } from './spacing';
 import { show } from './show';
 import { hide } from './hide';
+import { size } from './size';
+import { minSize } from './minSize';
+import { maxSize } from './maxSize';
 
 export default [
   direction,
@@ -32,4 +35,7 @@ export default [
   spacing,
   show,
   hide,
+  size,
+  minSize,
+  maxSize,
 ];

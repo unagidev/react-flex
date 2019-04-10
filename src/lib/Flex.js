@@ -9,6 +9,7 @@ import type { JustifyContent } from './properties/justifyContent';
 import type { AlignItems } from './properties/alignItems';
 import type { AlignSelf } from './properties/alignSelf';
 import type { CrossAxisAlign, MainAxisAlign } from './properties/align';
+import type { Height, Width } from './properties/size';
 
 type Props = {
   children: React$Element<any>,
@@ -23,19 +24,28 @@ type Props = {
   grow?: number | { [key: Breakpoint]: number },
   shrink?: number | { [key: Breakpoint]: number },
   basis?: string | number | { [key: Breakpoint]: string | number },
+  spacing?: string | { [key: Breakpoint]: string },
+  gap?: number | { [key: Breakpoint]: number },
+  fill?: boolean | { [key: Breakpoint]: boolean },
   align?:
     | MainAxisAlign
     | [MainAxisAlign, CrossAxisAlign]
     | { [key: Breakpoint]: MainAxisAlign | [MainAxisAlign, CrossAxisAlign] },
-  spacing?: string | { [key: Breakpoint]: string },
-  gap?: number | { [key: Breakpoint]: number },
-  fill?: boolean | { [key: Breakpoint]: boolean },
   size?:
     | string
-    | [string, string]
-    | { [key: Breakpoint]: string | [string, string] },
-  minSize?: string | { [key: Breakpoint]: string },
-  maxSize?: string | { [key: Breakpoint]: string },
+    | number
+    | [Width, Height]
+    | { [key: Breakpoint]: string | number | [Width, Height] },
+  minSize?:
+    | string
+    | number
+    | [Width, Height]
+    | { [key: Breakpoint]: string | number | [Width, Height] },
+  maxSize?:
+    | string
+    | number
+    | [Width, Height]
+    | { [key: Breakpoint]: string | number | [Width, Height] },
   show?: boolean | { [key: Breakpoint]: boolean },
   hide?: boolean | { [key: Breakpoint]: boolean },
 };

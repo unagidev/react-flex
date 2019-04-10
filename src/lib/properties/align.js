@@ -16,7 +16,6 @@ export type CrossAxisAlign =
   | 'baseline'
   | 'stretch';
 
-type AlignType = [MainAxisAlign,CrossAxisAlign]
 class Align extends Property {
   getValues(config: mixed): any[] {
     let mainAxis = null;
@@ -44,16 +43,18 @@ class Align extends Property {
 
       return [mainAxis, crossAxis];
     }
-
-    [mainAxis, crossAxis] = config;
-    mainAxis =
-      mainAxis === 'start' || mainAxis === 'end'
-        ? `flex-${mainAxis}`
-        : mainAxis;
-    crossAxis =
-      crossAxis === 'start' || crossAxis === 'end'
-        ? `flex-${crossAxis}`
-        : crossAxis;
+    if (typeof config === Array) {
+      //FlowFixMe
+      [mainAxis, crossAxis] = config;
+      mainAxis =
+        mainAxis === 'start' || mainAxis === 'end'
+          ? `flex-${mainAxis}`
+          : mainAxis;
+      crossAxis =
+        crossAxis === 'start' || crossAxis === 'end'
+          ? `flex-${crossAxis}`
+          : crossAxis;
+    }
 
     return [mainAxis, crossAxis];
   }

@@ -6,10 +6,11 @@ const Example = ({ direction }) => {
   return (
     <Flex direction="column">
       <Flex gap={{ xs: 20, sm: 10, es: 5 }} wrap>
-        <Flex basis={50} grow={1}>
+        <Flex basis={50} grow={1} size={['auto', 200]}>
           <Flex
             className="container"
             alignItems={direction || 'start'}
+            fill
             wrap
           >
             {[...Array(4)].map((u, i) => (
@@ -39,11 +40,11 @@ const AlignItems = () => {
         <h2 id="flex-align-items">Flex Align Items</h2>
       </Flex>
       <Flex direction="column" className="section" spacing={[0, [10, 5]]}>
-        <Example direction="start" />
-        <Example direction="center" />
-        <Example direction="end" />
-        <Example direction="baseline" />
-        <Example direction="stretch" />
+        <Example direction="start"/>
+        <Example direction="center"/>
+        <Example direction="end"/>
+        <Example direction="baseline"/>
+        <Example direction="stretch"/>
       </Flex>
     </Fragment>
   );
