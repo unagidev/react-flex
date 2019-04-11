@@ -26,7 +26,8 @@ export class Size extends Property {
 
       return [width, height];
     }
-    if (typeof config === Array) {
+
+    if (Array.isArray(config)) {
       //$FlowFixMe
       [width, height] = config;
       if (typeof width === 'number') {

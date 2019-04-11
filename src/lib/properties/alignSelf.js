@@ -1,24 +1,17 @@
 // @flow
 import Property from './base';
 
-export type AlignSelf =
-  | 'auto'
-  | 'start'
-  | 'end'
-  | 'center'
-  | 'baseline'
-  | 'stretch';
-
 class AlignSelfProp extends Property {
-  getValues(config: AlignSelf): [string | null] {
+  getValues(config: mixed): string[] {
     let alignSelf = null;
-    if (typeof config === 'undefined') {
+
+    if (typeof config === 'string') {
+      alignSelf =
+        config === 'start' || config === 'end' ? `flex-${config}` : config;
       return [alignSelf];
     }
 
-    alignSelf =
-      config === 'start' || config === 'end' ? `flex-${config}` : config;
-    return [alignSelf];
+    return [];
   }
 }
 

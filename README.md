@@ -1,8 +1,9 @@
 # react-flex
 
-> Responsove Flex component built for React
+> Responsive Flex component built for React
 
-[![NPM](https://img.shields.io/npm/v/react-flex.svg)](https://www.npmjs.com/package/react-flex) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-flex.svg)](https://www.npmjs.com/package/react-flex) 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
@@ -44,26 +45,38 @@ class Example extends Component {
 </Flex>
 ```
 
-### Props
-|Name              |Type                                                                                                                                             |Description                          |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| **children**     | `ReactChildren`                                                                                                                                 | **required**. Flex content.         |
-| **item**         | `Boolean`                                                                                                                                       | **optional**. **Default:** `false`. If true, the component will have the flex item behavior. |
-| **direction**    | <code>enum('row' &#124; 'column') &#124; {[key: Breakpoint]: enum('row' &#124; 'column')}</code>                               | **optional**. **Default:** `'row'`. Sets the flex container direction. If <code>item=true</code> this property has no effect. |
-| **align**        | <code>mainAxis &#124; [mainAxis, crossAxis] &#124; {[key: Breakpoint]: mainAxis &#124; [mainAxis, crossAxis]}</code>           | **optional**. **Default:** `['start', 'stretch']`. Sets the distribution of space around items of a flex container. If `item=true` this property behave as alignSelf. |
-| **alignContent** | <code>alignContent &#124; {[key: Breakpoint]: alignContent}</code>                                                             | **optional**. **Default:** `'stretch'`. Aligns a flex container's lines within when there is extra space in the cross-axis. If `item=true` this property has no effect. |
-| **alignSelf**    | <code>alignSelf &#124; {[key: Breakpoint]: alignSelf}</code>                                                                   | **optional**. Allows the default alignment (or the one specified by align[crossAxis]) to be overridden. If <code>item=true</code> this property has no effect, use align instead. |
-| **spacing**      | <code>outerSpace &#124; [outerSpace, innerSpace] &#124; {[key: Breakpoint]: outerSpace &#124; [outerSpace, innerSpace]}</code> | **optional**. Sets the inner (padding) and outer (margin) space of the wrapper element. |
-| **gap**          | <code>number &#124; string &#124; {[key: Breakpoint]: number &#124; string}</code>                                             | **optional**. Sets the separation between flex items. |
-| **size**         | <code>height &#124; [height, width] &#124; {[key: Breakpoint]: height &#124; [height, width]}</code>                           | **optional**. Sets the size (width, height) of the wrapper element  |
-| **grow**         | <code>Boolean &#124; Number &#124; {[key: Breakpoint]: Boolean &#124; Number}</code>                                           | **optional**. Sets the ability for a flex item to grow if necessary. If all items have grow set to 1, the remaining space in the container will be distributed equally to all children. A value of 2 means the remaining space would take up twice as much space as the others. |
-| **shrink**       | <code>Boolean &#124; Number &#124; {[key: Breakpoint]: Boolean &#124; Number}</code>                                           | **optional**. Sets the ability for a flex item to shrink if necessary. |
-| **basis**        | <code>Boolean &#124; Number &#124; {[key: Breakpoint]: Boolean &#124; Number}</code>                                           | **optional**. Sets the default size of an element before the remaining space is distributed. If set to 0, the extra space around content isn't factored in. If set to auto, the extra space is distributed based on its `grow` property. |
-| **wrap**         | <code>Boolean &#124; {[key: Breakpoint]: Boolean}</code>                                                                       | **optional**. Allow the items of a flex container to wrap as needed. |
-| **className**    | <code>String</code>                                                                                                                             | **optional**. Additional `className` for wrapper element |
-| **style**        | <code>Object</code>                                                                                                                             | **optional**. Inline-style overrides for wrapper element |
+
+### Flex Props
+
+|Name                |Type                                |Default      |Description                 |
+|--------------------|------------------------------------|-------------|----------------------------|
+| **children**       | `ReactChildren`                    |             |**required**. Flex content. |
+| **inline**         | <code>Boolean</code>               | `'flex'`    |**optional**. Sets the flex container direction. If <code>item=true</code> this property has no effect. |
+| **direction**      | <code>'row' &#124; 'column'</code> | `'row'`     |**optional**. Sets the flex container direction.|
+| **justifyContent** | <code>JustifyContent</code>        | `'start'`   |**optional**. Defines the alignment along the main axis. |
+| **alignItems**     | <code>AlignItems</code>            | `'stretch'` |**optional**. Defines the alignment along the cross axis. |
+| **alignSelf**      | <code>AlignItems</code>            | `'auto'`    |**optional**. Allows the default alignment (or the one specified by `alignItems`) to be overridden. |
+| **alignContent**   | <code>AlignItems</code>            | `'stretch'` |**optional**. Aligns a flex container's lines within when there is extra space in the cross-axis. |
+| **wrap**           | <code>Boolean</code>               | `false`     |**optional**. Allow the items of a flex container to wrap as needed. |
+| **grow**           | <code>Number</code>                | `0`         |**optional**. Sets the ability for a flex item to grow if necessary. |
+| **shrink**         | <code>Number</code>                | `0`         |**optional**. Sets the ability for a flex item to shrink if necessary. |
+| **basis**          | <code>String &#124; Number</code>  | `'auto'`    |**optional**. Sets the default size of an element before the remaining space is distributed. |
+
+
+### Non Flex Props
+
+|Name              |Type                                                     |Description                          |
+|------------------|-------------------------------------------------------- |-------------------------------------|
+| **align**        | <code>mainAxis &#124; [mainAxis, crossAxis]</code>      | **optional**. **Default:** `['start', 'stretch']`. Sets the distribution of space around items of a flex container. If `item=true` this property behave as alignSelf. |
+| **gap**          | <code>number &#124; string</code>                       | **optional**. Sets the separation between flex items. |
+| **size**         | <code>height &#124; [height, width]</code>              | **optional**. Sets the size (width, height) of the wrapper element  |
+| **spacing**      | <code>outerSpace &#124; [outerSpace, innerSpace]</code> | **optional**. Sets the inner (padding) and outer (margin) space of the wrapper element. |
+| **className**    | <code>String</code>                                     | **optional**. Additional `className` for wrapper element |
+| **style**        | <code>Object</code>                                     | **optional**. Inline-style overrides for wrapper element |
+
 
 #### Custom Types
+
 |Name                 |Type                                                                                                                        |Description                                                             |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | **Breakpoint**      | <code>enum('xs' &#124; 'es' &#124; 'sm' &#124; 'md' &#124; 'lg' &#124; 'xl')</code>                                        | **Default:** `'xs'`.                                                                       |
@@ -83,7 +96,6 @@ class Example extends Component {
 
                                          
 ## Responsive
-
 
 
 ## License

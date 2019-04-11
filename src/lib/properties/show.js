@@ -8,7 +8,6 @@ export const getDisplay = (inline: boolean = false, hide: boolean = false) => {
 
 class Show extends Property {
   format(property: string | Object) {
-    console.log(property);
     if (isObj(property)) {
       return property;
     }
@@ -22,7 +21,6 @@ class Show extends Property {
 
   getValues(config: Object): string[] {
     const { inline, propertyValue } = config;
-    console.log(inline, propertyValue);
     const display = propertyValue
       ? `${inline ? 'inline-flex' : 'flex'};`
       : 'none;';

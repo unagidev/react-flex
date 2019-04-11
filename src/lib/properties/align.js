@@ -44,7 +44,7 @@ class Align extends Property {
       return [mainAxis, crossAxis];
     }
     if (typeof config === Array) {
-      //FlowFixMe
+      //$FlowFixMe
       [mainAxis, crossAxis] = config;
       mainAxis =
         mainAxis === 'start' || mainAxis === 'end'

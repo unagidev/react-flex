@@ -6,7 +6,7 @@ export type JustifyContent =
   | 'end'
   | 'center'
   | 'space-between'
-  | 'space-around'
+  | 'space-between'
   | 'space-evenly';
 
 class JustifyContentProp extends Property {
