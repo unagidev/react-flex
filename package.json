@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/unagidev/react-flex/issues"
   },
-  "homepage": "https://github.com/unagidev/react-flex#readme",
+  "homepage": "https://github.com/react-flex",
   "license": "MIT",
   "dependencies": {
     "nanoid": "^2.0.1",
