@@ -18,9 +18,13 @@
   "bugs": {
     "url": "https://github.com/unagidev/react-flex/issues"
   },
-  "homepage": "https://github.com/unagidev/react-flex#readme",
+  "homepage": "https://github.com/react-flex",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "nanoid": "^2.0.1",
+    "node-sass": "^4.11.0",
+    "react-syntax-highlighter": "^10.2.1"
+  },
   "devDependencies": {
     "@babel/core": "7.2.2",
     "@svgr/webpack": "4.1.0",
