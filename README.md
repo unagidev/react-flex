@@ -25,8 +25,8 @@ import Flex from '@unagidev/react-flex'
 class Example extends Component {
   render () {
     return (
-        <Flex container align='center'>
-            <Flex item>I'm vertically centered!</Flex>
+        <Flex align='center'>
+            <Flex item>I'm vertically and horizontally centered!</Flex>
         </Flex>
     )
   }
@@ -35,12 +35,12 @@ class Example extends Component {
 
 ```jsx
 // flex row
-<Flex container>
+<Flex>
     ...
 </Flex>
 
 // flex column
-<Flex container direction="column">
+<Flex direction="column">
     ...
 </Flex>
 ```
@@ -65,38 +65,65 @@ class Example extends Component {
 
 ### Non Flex Props
 
-|Name              |Type                                                     |Description                          |
-|------------------|-------------------------------------------------------- |-------------------------------------|
-| **align**        | <code>mainAxis &#124; [mainAxis, crossAxis]</code>      | **optional**. **Default:** `['start', 'stretch']`. Sets the distribution of space around items of a flex container. If `item=true` this property behave as alignSelf. |
-| **gap**          | <code>number &#124; string</code>                       | **optional**. Sets the separation between flex items. |
-| **size**         | <code>height &#124; [height, width]</code>              | **optional**. Sets the size (width, height) of the wrapper element  |
-| **spacing**      | <code>outerSpace &#124; [outerSpace, innerSpace]</code> | **optional**. Sets the inner (padding) and outer (margin) space of the wrapper element. |
-| **className**    | <code>String</code>                                     | **optional**. Additional `className` for wrapper element |
-| **style**        | <code>Object</code>                                     | **optional**. Inline-style overrides for wrapper element |
+|Name              |Type                                                                                |Description                          |
+|------------------|----------------------------------------------------------------------------------- |-------------------------------------|
+| **gap**          | <code>number</code>                                                                | **optional**. Sets margin gaps on children within a flex container. |
+| **layoutGap**    | <code>number</code>                                                                | **optional**. Used internally to inform children of a flex container that a gap property is applied to their parent. |
+| **fill**         | <code>Boolean</code>                                                               | **optional**. Fill the available space. Is a shortcut of `grow=1` `srink=1` `basis=100%` |
+| **align**        | <code>union(JustifyContent, AlignItems) &#124; [justifyContent, alignItems]</code> | **optional**. Sets the distribution of space around items of a flex container. Is a shortcut to use both `justifyContent` and `alignItems` in the same property. |
+| **size**         | <code>union(Height, Width) &#124; [Height, Width]</code>                           | **optional**. Sets the size (width, height) of the wrapper element  |
+| **minSize**      | <code>union(Height, Width) &#124; [Height, Width]</code>                           | **optional**. Sets the minimum size (width, height) of the wrapper element  |
+| **maxSize**      | <code>union(Height, Width) &#124; [Height, Width]</code>                           | **optional**. Sets the maximum size (width, height) of the wrapper element  |
+| **spacing**      | <code>union(OuterSpace, InnerSpace) &#124; [OuterSpace, InnerSpace]</code>         | **optional**. Sets the inner (padding) and outer (margin) space of the wrapper element. |
+| **show**         | <code>Boolean</code>                                                               | **optional**. Default: `true`. Sets the visibility for wrapper element |
+| **hide**         | <code>Boolean</code>                                                               | **optional**. Default: `null`. Sets the visibility for wrapper element |
+| **className**    | <code>String</code>                                                                | **optional**. Additional `className` for wrapper element |
+| **style**        | <code>Object</code>                                                                | **optional**. Inline-style overrides for wrapper element |
 
 
 #### Custom Types
 
 |Name                 |Type                                                                                                                        |Description                                                             |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| **Breakpoint**      | <code>enum('xs' &#124; 'es' &#124; 'sm' &#124; 'md' &#124; 'lg' &#124; 'xl')</code>                                        | **Default:** `'xs'`.                                                                       |
-| **mainAxis**        | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'space-between' &#124; 'space-around' &#124; 'space-evenly')</code> | **Default:** `'start'`. Defines the alignment along the main axis. Same behavior as`justify-content` css property. |
-| **crossAxis**       | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'stretch' &#124; 'baseline')</code>                                 | **Default:** `'stretch'`. Defines the default behavior for how flex items are laid out along the cross axis on the current line. Same behavior as `align-items` css property. |
-| **alignContent**    | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'space-between' &#124; 'space-around' &#124; 'space-evenly')</code> | **Default:** `'stretch'`   |
-| **alignSelf**       | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'space-between' &#124; 'space-around' &#124; 'space-evenly')</code> | **Default:** `'stretch'`   |
-| **outerSpace**      | <code>string &#124; number &#124; [verticalSpace, horizontalSpace] &#124; [top, right, bottom, left]</code>                | **Default:** `[0,0]`. If string a valid css margin string will be a   |
-| **innerSpace**      | <code>string &#124; number &#124; [verticalSpace, horizontalSpace] &#124; [top, right, bottom, left]</code>                | **Default:** `'stretch'`   |
-| **verticalSpace**   | <code>string &#124; number</code>                                                                                          | **Default:** `'stretch'`   |   
-| **horizontalSpace** | <code>string &#124; number</code>                                                                                          | **Default:** `'stretch'`  |
-| **right**           | <code>string &#124; number</code>                                                                                          | **Default:** `'stretch'`   |  
-| **bottom**          | <code>string &#124; number</code>                                                                                          | **Default:** `'stretch'`    | 
-| **left**            | <code>string &#124; number</code>                                                                                          | **Default:** `'stretch'`  |    
-| **height**          | <code>string &#124; number</code>                                                                                          | **Default:** `'stretch'`   |  
-| **width**           | <code>string &#124; number</code>                                                                                          | **Default:** `'stretch'`   |
+| **JustifyContent**  | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'space-between' &#124; 'space-around' &#124; 'space-evenly')</code> | Defines the alignment along the main axis.|
+| **AlignItems**      | <code>enum('start' &#124; 'center' &#124; 'end' &#124; 'stretch' &#124; 'baseline')</code>                                 | Defines the default behavior for how flex items are laid out along the cross axis on the current line. |
+| **OuterSpace**      | <code>string &#124; number &#124; [VerticalSpace, HorizontalSpace] &#124; [Top, Right, Bottom, Left]</code>                | Sets the outer space. Same behavior as `margin` css property.|
+| **InnerSpace**      | <code>string &#124; number &#124; [VerticalSpace, HorizontalSpace] &#124; [Top, Right, Bottom, Left]</code>                | Sets the inner space. Same behavior as `padding` css property.|
+| **VerticalSpace**   | <code>string &#124; number</code>                                                                                          | Sets the vertical space `margin-top`, `margin-bottom` if the property is `OuterSpace` or  `padding-top`, `padding-bottom` otherwise. |   
+| **HorizontalSpace** | <code>string &#124; number</code>                                                                                          | Sets the horizontal space `margin-left`, `margin-right` if the property is `OuterSpace` or  `padding-left`, `padding-right` otherwise.  |
+| **Top**             | <code>string &#124; number</code>                                                                                          | Sets the top space `margin-top` if the property is `OuterSpace` or `padding-top` if is `InnerSpace` |  
+| **Right**           | <code>string &#124; number</code>                                                                                          | Sets the top space `margin-right` if the property is `OuterSpace` or `padding-right` if is `InnerSpace`   |  
+| **Bottom**          | <code>string &#124; number</code>                                                                                          | Sets the top space `margin-bottom` if the property is `OuterSpace` or `padding-bottom` if is `InnerSpace`    | 
+| **Left**            | <code>string &#124; number</code>                                                                                          | Sets the top space `margin-left` if the property is `OuterSpace` or `padding-left` if is `InnerSpace`  |    
+| **Height**          | <code>string &#124; number</code>                                                                                          | Sets the `height` for wrapper element |  
+| **Width**           | <code>string &#124; number</code>                                                                                          | Sets the `width` for wrapper element |
 
                                          
 ## Responsive
+Every property accepts a breakpoint object in this format: `{ [key: Breakpoint]: property }` where `Breakpoint` is one 
+of the following:
 
+#### Breakpoints
+
+|key       |Screen size               |Css Definition                                                    |
+|----------|--------------------------|------------------------------------------------------------------|
+| `'xs'`   | Default                  | `@media screen and (min-width : 0)`                              |                                                               |
+| `'es'`   | Extra Small              | `@media screen and (max-width : 575px)`                          |                                                           |
+| `'gtEs'` | Greater than Extra Small | `@media screen and (min-width : 576px)`                          |                                                               |
+| `'sm'`   | Small                    | `@media screen and (min-width : 576px) and (max-width : 767px)`  |                                                               |
+| `'gtSm'` | Greater than Small       | `@media screen and (min-width : 768px)`                          |                                                               |
+| `'md'`   | Medium                   | `@media screen and (min-width : 768px) and (max-width : 991px)`  |                                                               |
+| `'gtMd'` | Greater than Medium      | `@media screen and (min-width : 992px)`                          |                                                               |
+| `'lg'`   | Large                    | `@media screen and (min-width : 992px) and (max-width : 1199px)` |                                                               |
+| `'xl'`   | Extra Large              | `@media screen and (min-width : 1200px)`                         |                                                               |
+
+#### Example:
+
+```jsx
+<Flex direction={{xs:'row', sm:'column'}}>
+    // Flex items will be displayed in column on small screens and row otherwise
+</Flex>
+```
 
 ## License
 
