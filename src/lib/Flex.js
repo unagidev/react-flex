@@ -26,6 +26,7 @@ type Props = {
   basis?: string | number | { [key: Breakpoint]: string | number },
   spacing?: string | { [key: Breakpoint]: string },
   gap?: number | { [key: Breakpoint]: number },
+  layoutGap?: number,
   fill?: boolean | { [key: Breakpoint]: boolean },
   align?:
     | MainAxisAlign
@@ -61,7 +62,8 @@ class Flex extends Component<Props, State> {
     rules: {},
   };
   children = React.Children.map(this.props.children, child => {
-    if (child && child.type && child.type.name === 'Flex') {
+    // console.log(child.type === <Flex />.type);
+    if (child && child.type && child.type === <Flex />.type) {
       return React.cloneElement(child, {
         layoutGap: this.props.gap,
       });
