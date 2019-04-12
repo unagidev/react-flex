@@ -5,7 +5,11 @@
 [![NPM](https://img.shields.io/npm/v/react-flex.svg)](https://www.npmjs.com/package/react-flex) 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
+`react-flex` is a Responsive Flex component built for React.
+
+**https://unagidev.github.io/react-flex/demo/**
+
+## Installation
 
 ```bash
 npm install --save @unagidev/react-flex
@@ -127,4 +131,4 @@ of the following:
 
 ## License
 
-MIT © [dbartumeu](https://github.com/dbartumeu)
+MIT
