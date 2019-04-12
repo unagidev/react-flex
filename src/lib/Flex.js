@@ -7,7 +7,6 @@ import properties from './properties';
 import type { AlignContent } from './properties/alignContent';
 import type { JustifyContent } from './properties/justifyContent';
 import type { AlignItems } from './properties/alignItems';
-import type { AlignSelf } from './properties/alignSelf';
 import type { CrossAxisAlign, MainAxisAlign } from './properties/align';
 import type { Height, Width } from './properties/size';
 
@@ -18,7 +17,7 @@ type Props = {
   direction?: string | { [key: Breakpoint]: string },
   justifyContent?: JustifyContent | { [key: Breakpoint]: JustifyContent },
   alignItems?: AlignItems | { [key: Breakpoint]: AlignItems },
-  alignSelf?: AlignSelf | { [key: Breakpoint]: AlignContent },
+  alignSelf?: 'auto' | AlignItems | { [key: Breakpoint]: AlignContent },
   alignContent?: AlignItems | { [key: Breakpoint]: AlignItems },
   wrap?: boolean | { [key: Breakpoint]: boolean },
   grow?: number | { [key: Breakpoint]: number },
@@ -63,7 +62,7 @@ class Flex extends Component<Props, State> {
   };
   children = React.Children.map(this.props.children, child => {
     // console.log(child.type === <Flex />.type);
-    if (child && child.type && child.type === <Flex />.type) {
+    if (child && child.type && child.type === Flex) {
       return React.cloneElement(child, {
         layoutGap: this.props.gap,
       });
