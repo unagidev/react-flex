@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { getId } from './helpers';
+import { getId, isEqual } from './helpers';
 import type { Breakpoint } from './StyleManager';
 import styleManager from './StyleManager';
 import properties from './properties';
@@ -79,11 +79,11 @@ class Flex extends Component<Props, State> {
   }
 
   componentWillUnmount(): void {
-    //
+    styleManager.removeClass(this.state.id);
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State, nextContext: any) {
-    return true;
+    return isEqual(this.props, nextProps);
   }
 
   addRule = (selector: string, declaration: string) => {
