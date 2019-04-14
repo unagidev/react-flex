@@ -107,11 +107,13 @@ class Flex extends Component<Props, State> {
       if (prop[breakpoint] || typeof prop[breakpoint] === 'boolean') {
         if (getValues) {
           const values = getValues(prop[breakpoint]);
-          values.forEach((value, i) => {
-            if (value) {
-              this.addRule(breakpoint, `${cssProps[i]}: ${value};`);
-            }
-          });
+          if (values) {
+            values.forEach((value, i) => {
+              if (value) {
+                this.addRule(breakpoint, `${cssProps[i]}: ${value};`);
+              }
+            });
+          }
         } else {
           this.addRule(breakpoint, `${cssProps[0]}: ${prop[breakpoint]};`);
         }
@@ -120,8 +122,6 @@ class Flex extends Component<Props, State> {
   };
 
   buildRuleSet() {
-    // this.addRule('xs', getDisplay(this.props.inline));
-
     properties.forEach(property => {
       if (this.props[property.name]) {
         this.addRules(
@@ -163,6 +163,7 @@ class Flex extends Component<Props, State> {
   getElProps() {
     const {
       children,
+      inline,
       direction,
       justifyContent,
       alignItems,
