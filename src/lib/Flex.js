@@ -122,8 +122,6 @@ class Flex extends Component<Props, State> {
   };
 
   buildRuleSet() {
-    // this.addRule('xs', getDisplay(this.props.inline));
-
     properties.forEach(property => {
       if (this.props[property.name]) {
         this.addRules(
@@ -165,6 +163,7 @@ class Flex extends Component<Props, State> {
   getElProps() {
     const {
       children,
+      inline,
       direction,
       justifyContent,
       alignItems,
