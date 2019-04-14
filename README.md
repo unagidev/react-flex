@@ -4,6 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/react-flex.svg)](https://www.npmjs.com/package/react-flex) 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Build Status](https://travis-ci.org/unagidev/react-flex.png?branch=master)](https://travis-ci.org/unagidev/react-flex)
 
 `react-flex` is a Responsive Flex component built for React.
 
