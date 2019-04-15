@@ -61,7 +61,6 @@ class Flex extends Component<Props, State> {
     rules: {},
   };
   children = React.Children.map(this.props.children, child => {
-    // console.log(child.type === <Flex />.type);
     if (child && child.type && child.type === Flex) {
       return React.cloneElement(child, {
         layoutGap: this.props.gap,
