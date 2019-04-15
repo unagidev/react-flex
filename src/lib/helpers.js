@@ -10,7 +10,7 @@ export const isArr = (value: any) => {
   return Array.isArray(value);
 };
 
-export const isEqual = (a, b, opts) => {
+export const isEqual = (a: Object, b: Object, opts: Object) => {
   return deepEqual(a, b, opts);
 };
 
