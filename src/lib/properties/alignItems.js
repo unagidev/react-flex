@@ -4,6 +4,7 @@ import Property from './base';
 export type AlignItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
 
 class AlignItemsProp extends Property {
+  //$FlowFixMe
   getValues(config: AlignItems): [string | null] {
     let alignItems = null;
     if (typeof config === 'undefined') {
@@ -16,6 +17,4 @@ class AlignItemsProp extends Property {
   }
 }
 
-export const alignItems = new AlignItemsProp('alignItems', [
-  'align-items',
-]);
+export const alignItems = new AlignItemsProp('alignItems', ['align-items']);
