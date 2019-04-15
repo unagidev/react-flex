@@ -100,7 +100,7 @@ class Flex extends Component<Props, State> {
   addRules = (
     cssProps: string[],
     prop: { [key: Breakpoint]: string },
-    getValues: ?(props: Object) => string[] | null,
+    getValues: ?(props: Object) => string[] | null
   ) => {
     const breakpoints = Object.keys(styleManager.breakpoints);
     breakpoints.forEach(breakpoint => {
@@ -134,7 +134,7 @@ class Flex extends Component<Props, State> {
               return property.getValues({ inline, propertyValue });
             }
             return property.getValues(propertyValue);
-          },
+          }
         );
       } else {
         const isShow = property.name === 'show';
@@ -145,7 +145,7 @@ class Flex extends Component<Props, State> {
             propertyValue => {
               const inline = this.props.inline;
               return property.getValues({ inline, propertyValue });
-            },
+            }
           );
         }
       }
