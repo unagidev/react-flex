@@ -1,7 +1,11 @@
 {
-  "name": "react-flex",
-  "version": "0.0.1",
+  "name": "@unagidev/react-flex",
+  "version": "0.0.0-dev",
   "description": "Responsive Flex component built for React",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "build/index.js",
   "scripts": {
     "start": "node scripts/start.js",
@@ -19,7 +23,6 @@
     "url": "https://github.com/unagidev/react-flex/issues"
   },
   "homepage": "https://github.com/react-flex/demo/",
-  "license": "MIT",
   "dependencies": {
     "deep-equal": "^1.0.1",
     "nanoid": "^2.0.1"
