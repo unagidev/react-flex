@@ -1,5 +1,6 @@
 // @flow
 import Property from './base';
+import { isArr } from '../helpers';
 
 export type MainAxisAlign =
   | 'start'
@@ -43,7 +44,7 @@ class Align extends Property {
 
       return [mainAxis, crossAxis];
     }
-    if (typeof config === Array) {
+    if (isArr(config)) {
       //$FlowFixMe
       [mainAxis, crossAxis] = config;
       mainAxis =
