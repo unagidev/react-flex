@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/unagidev/react-flex/issues"
   },
-  "homepage": "https://github.com/react-flex/demo/",
+  "homepage": "https://unagidev.github.io/react-flex/demo/",
   "dependencies": {
     "deep-equal": "^1.0.1",
     "nanoid": "^2.0.1"

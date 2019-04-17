@@ -5,6 +5,9 @@
 [![NPM](https://img.shields.io/npm/v/react-flex.svg)](https://www.npmjs.com/package/react-flex) 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/unagidev/react-flex.png?branch=master)](https://travis-ci.org/unagidev/react-flex)
+[![npm](https://img.shields.io/npm/dt/@unagidev/react-flex.svg)](https://www.npmjs.com/package/@unagidev/react-flex)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+![NPM](https://img.shields.io/npm/l/@unagidev/react-flex.svg)
 
 `react-flex` is a Responsive Flex component built for React.
 
@@ -56,7 +59,7 @@ class Example extends Component {
 |Name                |Type                                |Default      |Description                 |
 |--------------------|------------------------------------|-------------|----------------------------|
 | **children**       | `ReactChildren`                    |             |**required**. Flex content. |
-| **inline**         | <code>Boolean</code>               | `'flex'`    |**optional**. Sets the flex container direction. If <code>item=true</code> this property has no effect. |
+| **inline**         | <code>Boolean</code>               | `'flex'`    |**optional**. Sets the flex container position.|
 | **direction**      | <code>'row' &#124; 'column'</code> | `'row'`     |**optional**. Sets the flex container direction.|
 | **justifyContent** | <code>JustifyContent</code>        | `'start'`   |**optional**. Defines the alignment along the main axis. |
 | **alignItems**     | <code>AlignItems</code>            | `'stretch'` |**optional**. Defines the alignment along the cross axis. |
