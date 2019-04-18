@@ -183,10 +183,6 @@ function build(previousFileSizes) {
 }
 
 function copyPublicFolder() {
-  fs.copySync(paths.appPublic, paths.appBuild, {
-    dereference: true,
-    filter: file => file !== paths.appHtml,
-  });
   fs.copySync(paths.appLibSrc + '/Flex.d.ts', paths.appBuild + '/index.d.ts', {
     dereference: true,
     filter: file => file !== paths.appHtml,
