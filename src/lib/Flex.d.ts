@@ -15,7 +15,7 @@ export type Width = string | number;
 export type Height = string | number;
 
 export interface FlexProps {
-  children: React.Element<any>;
+  children: React.ElementType<any>;
   className?: string;
   inline?: boolean | { [key: string]: boolean };
   direction?: string | { [key: string]: string };
