@@ -6,6 +6,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "build"
+  ],
   "main": "build/index.js",
   "scripts": {
     "start": "node scripts/start.js",
