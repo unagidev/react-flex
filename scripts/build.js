@@ -14,7 +14,6 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
@@ -40,7 +39,8 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appLibIndexJs])) { // CRL: Updated with library index file
+if (!checkRequiredFiles([paths.appLibIndexJs])) {
+  // CRL: Updated with library index file
   process.exit(1);
 }
 
@@ -184,6 +184,10 @@ function build(previousFileSizes) {
 
 function copyPublicFolder() {
   fs.copySync(paths.appPublic, paths.appBuild, {
+    dereference: true,
+    filter: file => file !== paths.appHtml,
+  });
+  fs.copySync(paths.appLibSrc + '/Flex.d.ts', paths.appBuild + '/index.d.ts', {
     dereference: true,
     filter: file => file !== paths.appHtml,
   });
