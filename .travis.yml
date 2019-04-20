@@ -19,7 +19,7 @@ jobs:
     - stage: Produce Coverage
       node_js: 10
       script:
-        - npm test --coverage --collectCoverageFrom=src/lib/**/*.js --coverageReporters=text-lcov | coveralls
+        - npm run-script test --coverage --collectCoverageFrom=src/lib/**/*.js --coverageReporters=text-lcov | coveralls
     - stage: release
       node_js: 10
       script: skip
