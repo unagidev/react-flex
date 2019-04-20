@@ -34,7 +34,7 @@ class Example extends Component {
   render () {
     return (
         <Flex align='center'>
-            <Flex item>I'm vertically and horizontally centered!</Flex>
+            <Flex>I'm vertically and horizontally centered!</Flex>
         </Flex>
     )
   }
@@ -115,15 +115,15 @@ of the following:
 
 |key       |Screen size               |Css Definition                                                    |
 |----------|--------------------------|------------------------------------------------------------------|
-| `'xs'`   | Default                  | `@media screen and (min-width : 0)`                              |                                                               |
-| `'es'`   | Extra Small              | `@media screen and (max-width : 575px)`                          |                                                           |
-| `'gtEs'` | Greater than Extra Small | `@media screen and (min-width : 576px)`                          |                                                               |
-| `'sm'`   | Small                    | `@media screen and (min-width : 576px) and (max-width : 767px)`  |                                                               |
-| `'gtSm'` | Greater than Small       | `@media screen and (min-width : 768px)`                          |                                                               |
-| `'md'`   | Medium                   | `@media screen and (min-width : 768px) and (max-width : 991px)`  |                                                               |
-| `'gtMd'` | Greater than Medium      | `@media screen and (min-width : 992px)`                          |                                                               |
-| `'lg'`   | Large                    | `@media screen and (min-width : 992px) and (max-width : 1199px)` |                                                               |
-| `'xl'`   | Extra Large              | `@media screen and (min-width : 1200px)`                         |                                                               |
+| `'xs'`   | Default                  | `@media screen and (min-width : 0)`                              |
+| `'es'`   | Extra Small              | `@media screen and (max-width : 575px)`                          |
+| `'gtEs'` | Greater than Extra Small | `@media screen and (min-width : 576px)`                          |
+| `'sm'`   | Small                    | `@media screen and (min-width : 576px) and (max-width : 767px)`  |
+| `'gtSm'` | Greater than Small       | `@media screen and (min-width : 768px)`                          |
+| `'md'`   | Medium                   | `@media screen and (min-width : 768px) and (max-width : 991px)`  |
+| `'gtMd'` | Greater than Medium      | `@media screen and (min-width : 992px)`                          |
+| `'lg'`   | Large                    | `@media screen and (min-width : 992px) and (max-width : 1199px)` |
+| `'xl'`   | Extra Large              | `@media screen and (min-width : 1200px)`                         |
 
 #### Example:
 
