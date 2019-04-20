@@ -13,9 +13,13 @@ before_install:
 install:
   - npm install
 script:
-  - npm test --coverage --collectCoverageFrom=src/lib/**/*.js --coverageReporters=text-lcov | coveralls
+  - npm test
 jobs:
   include:
+    - stage: Produce Coverage
+      node_js: 10
+      script:
+        - npm test --coverage --collectCoverageFrom=src/lib/**/*.js --coverageReporters=text-lcov | coveralls
     - stage: release
       node_js: 10
       script: skip
