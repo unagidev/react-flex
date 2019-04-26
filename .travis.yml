@@ -18,8 +18,7 @@ jobs:
   include:
     - stage: Produce Coverage
       node_js: 10
-      script:
-        - npm run-script test --coverage --collectCoverageFrom=src/lib/**/*.js --coverageReporters=text-lcov | coveralls
+      script: "npm run-script jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls"
     - stage: release
       node_js: 10
       script: skip
