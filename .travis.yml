@@ -20,7 +20,6 @@ jobs:
       if: env(TRAVIS_PULL_REQUEST) = true
       node_js: 10
       script: 'npm run-script test'
-        - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls'
     - stage: Produce Coverage
       if: env(TRAVIS_PULL_REQUEST) = false
       node_js: 10
