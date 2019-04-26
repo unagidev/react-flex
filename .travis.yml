@@ -16,7 +16,6 @@ script: 'jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage
 jobs:
   include:
     - stage: Release
-      if: env(TRAVIS_PULL_REQUEST) = false
       node_js: 10
       script: skip
       deploy:
