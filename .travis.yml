@@ -12,18 +12,9 @@ before_install:
   - npm update
 install:
   - npm install
-script:
-  - npm test
+script: 'jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls'
 jobs:
   include:
-    - stage: Test
-      if: env(TRAVIS_PULL_REQUEST) = true
-      node_js: 10
-      script: 'npm run-script test'
-    - stage: Produce Coverage
-      if: env(TRAVIS_PULL_REQUEST) = false
-      node_js: 10
-      script: 'jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls'
     - stage: Release
       if: env(TRAVIS_PULL_REQUEST) = false
       node_js: 10
