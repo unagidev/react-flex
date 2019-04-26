@@ -16,10 +16,17 @@ script:
   - npm test
 jobs:
   include:
-    - stage: Produce Coverage
+    - stage: Test
+      if: env(TRAVIS_PULL_REQUEST) = true
       node_js: 10
-      script: "jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls"
-    - stage: release
+      script: 'npm run-script test'
+        - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls'
+    - stage: Produce Coverage
+      if: env(TRAVIS_PULL_REQUEST) = false
+      node_js: 10
+      script: 'jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls'
+    - stage: Release
+      if: env(TRAVIS_PULL_REQUEST) = false
       node_js: 10
       script: skip
       deploy:
