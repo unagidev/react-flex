@@ -1,4 +1,3 @@
-sudo: false
 language: node_js
 node_js:
   - 10
@@ -12,10 +11,13 @@ before_install:
   - npm update
 install:
   - npm install
-script: 'jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls'
 jobs:
   include:
+    - stage: Test
+      node_js: 10
+      script: 'jest --coverage --collectCoverageFrom=src/lib/**/*.js && cat ./coverage/lcov.info | coveralls'
     - stage: Release
+      if: (NOT type IN (pull_request)) AND (branch = master)
       node_js: 10
       script: skip
       deploy:
