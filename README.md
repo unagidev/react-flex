@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/react-flex.svg)](https://www.npmjs.com/package/react-flex) 
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Build Status](https://travis-ci.org/unagidev/react-flex.png?branch=master)](https://travis-ci.org/unagidev/react-flex)
+[![Build Status](https://travis-ci.org/unagidev/react-flex.svg?branch=master)](https://travis-ci.org/unagidev/react-flex)
 [![Coverage Status](https://coveralls.io/repos/github/unagidev/react-flex/badge.svg)](https://coveralls.io/github/unagidev/react-flex)
 [![npm](https://img.shields.io/npm/dt/@unagidev/react-flex.svg)](https://www.npmjs.com/package/@unagidev/react-flex)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
