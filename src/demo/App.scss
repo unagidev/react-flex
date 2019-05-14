@@ -24,6 +24,22 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
+a, .link {
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+  color:  lighten(#495057, 20);;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: darken(#495057, 20);
+  }
+}
+
 @for $i from 1 through 6 {
   $fz: 0.35;
   $lh: 0.25;
@@ -63,15 +79,15 @@ h1, h2, h3, h4, h5, h6 {
   padding: 6px;
   border-radius: 4px;
 
-  &.primary{
+  &.primary {
     background: #228BE6;
   }
 
-  &.success{
+  &.success {
     background: #12B886;
   }
 
-  &.danger{
+  &.danger {
     background: #F03E3E;
   }
 }
@@ -94,7 +110,8 @@ pre {
   padding: 5px 10px !important;
   border-radius: 4px;
   margin: 0 !important;
-  code{
+
+  code {
     font-size: 14px;
   }
 }

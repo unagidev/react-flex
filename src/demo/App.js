@@ -23,9 +23,11 @@ const App = () => {
           <div className="title">React Flex</div>
         </Flex>
         <Flex align={['end', 'center']} show={{ xs: false, gtEs: true }}>
-          <Flex spacing={[0, 10]}>Static</Flex>
-          <Flex spacing={[0, 10]}>Responsive</Flex>
-          <Flex spacing={[0, 10]}>Github</Flex>
+          <Flex spacing={[0, 10]} className="link">Static</Flex>
+          <Flex spacing={[0, 10]} className="link">Responsive</Flex>
+          <Flex spacing={[0, 10]}>
+            <a href="https://github.com/unagidev/react-flex">Github</a>
+          </Flex>
         </Flex>
       </Flex>
       <Flex

@@ -1,6 +1,6 @@
 {
   "name": "@unagidev/react-flex",
-  "version": "0.0.0-dev",
+  "version": "1.1.2",
   "description": "Responsive Flex component built for React",
   "license": "MIT",
   "publishConfig": {
