@@ -5,7 +5,7 @@ import Code from '../components/Code';
 
 const DirectionRow = () => {
   return (
-    <Flex direction="column" basis={50}>
+    <Flex direction="column" basis={50} grow={1}>
       <Flex spacing={[5, 10]}>
         <h4>Direction Row</h4>
       </Flex>
@@ -36,7 +36,7 @@ const DirectionRow = () => {
 
 const DirectionColumn = () => {
   return (
-    <Flex direction="column" basis={50}>
+    <Flex direction="column" basis={50} grow={1}>
       <Flex spacing={[5, 10]}>
         <h4>Direction Column</h4>
       </Flex>
@@ -72,7 +72,7 @@ const Wrap = () => {
       <Flex spacing={['40px 0 20px 0', 0]}>
         <h2 id="flex-wrap">Flex Wrap</h2>
       </Flex>
-      <Flex className="section" spacing={[0, [10, 5]]}>
+      <Flex className="section" spacing={[0, [10, 5]]} wrap>
         <DirectionRow/>
         <DirectionColumn/>
       </Flex>

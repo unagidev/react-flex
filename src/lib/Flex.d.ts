@@ -5,7 +5,6 @@ export type JustifyContent =
   | 'end'
   | 'center'
   | 'space-between'
-  | 'space-between'
   | 'space-evenly';
 
 export type AlignItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
