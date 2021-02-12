@@ -6,29 +6,29 @@ import Code from '../components/Code';
 const DirectionRow = () => {
   return (
     <Flex direction="column">
-      <Flex className="container" spacing={{ xs: 10, es: 5 }}>
-        <Flex spacing={[5, 10]} basis={10}>
+      <Flex className="container" spacing={{ xs: 10, es: 5 }} gap={10}>
+        <Flex basis={10}>
           <div className="item full-width">
             <span>Item 1</span>
             <br />
             <code>basis=10%</code>
           </div>
         </Flex>
-        <Flex spacing={[5, 10]} basis={20}>
+        <Flex basis={20}>
           <div className="item success full-width">
             <span>Item 2</span>
             <br />
             <code>basis=20%</code>
           </div>
         </Flex>
-        <Flex spacing={[5, 10]} basis={30}>
+        <Flex basis={30}>
           <div className="item primary full-width" basis={30}>
             <span>Item 3</span>
             <br />
             <code>basis=30%</code>
           </div>
         </Flex>
-        <Flex spacing={[5, 10]} basis={40}>
+        <Flex basis={40}>
           <div className="item danger full-width" basis={10}>
             <span>Item 4</span>
             <br />
