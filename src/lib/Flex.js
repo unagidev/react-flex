@@ -69,7 +69,7 @@ class Flex extends Component<Props, State> {
     return child;
   });
 
-  componentWillMount(): void {
+  UNSAFE_componentWillMount(): void {
     if (this.props.show && this.props.hide) {
       throw Error('show & hide can not be combined');
     }
