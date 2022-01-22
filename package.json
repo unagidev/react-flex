@@ -30,7 +30,7 @@
   "homepage": "https://unagidev.github.io/react-flex/demo/",
   "dependencies": {
     "deep-equal": "^1.0.1",
-    "nanoid": "^2.0.1"
+    "nanoid": "^3.1.31"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
